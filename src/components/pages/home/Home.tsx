@@ -40,8 +40,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="bg-gray-200     relative -z-0 h-screen ">
-      <section className="flex flex-col items-center justify-center text-center px-4 py-8">
+    <div className="bg-gray-200  flex flex-col gap-10 ">
+      <section className=" relative -z-0 flex flex-col items-center justify-center text-center px-4 py-8">
         <h2 className=" text-2xl font-medium md:w-fit md:text-6xl  text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           ברוכים הבאים ל-Eazy Buy!
         </h2>
@@ -67,9 +67,9 @@ export default function Home() {
           גלו עכשיו
         </Button>
       </section>
-      <div className=" h-52"></div>
-      <section className=" p-16  ">
-        <h1 className=" text-center  font-medium   md:text-6xl  text-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] ">
+
+      <section className=" p-16 ">
+        <h1 className=" text-center py-10 font-medium  text-4xl md:text-6xl  text-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] ">
           מוצרים מובילים
         </h1>
         {products.map((products, index) => (
