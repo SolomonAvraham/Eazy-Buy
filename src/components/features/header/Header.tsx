@@ -15,7 +15,7 @@ const Header = () => {
           <img
             src="/icons/icon.png"
             alt="icon"
-            width="30rem"
+            width="25rem"
             />
         </div>
       </nav>
