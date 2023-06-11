@@ -21,7 +21,7 @@ const Header = () => {
             50% מבצע על ללקוחות רשומים
           </h1>
           <p className="text-sm mt-3">
-            המצבע הנ"ל החל מהתאריך 11/6/2023 ועד לתאריך 11/9/2023
+            המבצע הנ"ל במגבלת זמן, החל מהתאריך 11/6/2023 ועד לתאריך 11/9/2023
           </p>
         </div>
         {/* Temporary.. need to be switch to another pic !! */}
@@ -30,7 +30,6 @@ const Header = () => {
         </div>
         {/* ------- */}
       </div>
-      <hr className="border-1 mx-10" />
     </header>
   );
 };
