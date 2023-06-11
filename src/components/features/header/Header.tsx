@@ -12,7 +12,11 @@ const Header = () => {
           <SocialLinks />
         </div>
         <div>
-          <p>Logo</p>
+          <img
+            src="/icons/icon.png"
+            alt="icon"
+            width="30rem"
+            />
         </div>
       </nav>
       <div className="flex justify-between gap-8 mt-5 mb-4 mx-10">
