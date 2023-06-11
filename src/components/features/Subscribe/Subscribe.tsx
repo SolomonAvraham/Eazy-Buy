@@ -3,7 +3,7 @@ import Button from '../button/Button';
 const Subscribe = () => {
     return (
         <div className='text-center bg-wh-10 px-5 py-10'>
-            <h4 className='font-semibold text-base'>הירשמו לניוזלטר שלנו</h4>
+            <h4 className='font-semibold text-base'>הירשמו למועדון שלנו</h4>
             <p className='text-wh-500 my-3 w-5/6 mx-auto'>
                 הזינו כתובת דוא"ל כדי לקבל חדשות מובילות ודילים מעולים!!
             </p>
