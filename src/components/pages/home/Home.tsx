@@ -1,7 +1,7 @@
 import Card from "../../features/card/Card";
 import Button from "../../features/button/Button";
 
-export default function Home() {
+export default function cHome() {
   interface ProductsTypes {
     image: string;
     title: any;
