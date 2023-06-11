@@ -1,28 +1,26 @@
 const Footer = () => {
   return (
-    <footer className="bg-wh-900 text-wh-50 py-10 px-10  ">
-      <div className="justify-between mx-auto gap-16 sm:flex">
+    <footer className="bg-wh-900 text-wh-50 py-2 px-10">
+      <div className="justify-between mx-auto gap-1p sm:flex">
         {/* FIRST COLUMN */}
         <div className="mt-16 basis-1/2 sm:mt-0">
-          <h4 className="font-bold">BLOG OF THE FUTURE</h4>
+          <h4 className="font-bold">EAZY BUY</h4>
           <p className="my-5">
-            Lorem vitae ut augue auctor faucibus eget eget ut libero. Elementum
-            purus et arcu massa dictum condimentum. Augue scelerisque iaculis
-            orci ut habitant laoreet. Iaculis tristique.
+            בחנות שלנו תוכלו למצוא מגוון רחב של מוצרים דיגיטליים המתאימים לכל הצרכים. אנו מתמחים במכשירים חשמליים, טכנולוגיה מתקדמת ומוצרי בית חכם המעניקים לכם חווית שימוש מהנה ומתקדמת.
           </p>
-          <p>© Blog of the Future All Rights Reserved.</p>
+          <p>© כל הזכויות שמורות</p>
         </div>
         {/* SECOND COLUMN */}
         <div className="mt-16 basis-1/4 sm:mt-0">
-          <h4 className="font-bold">Links</h4>
-          <p className="my-5">Massa orci senectus</p>
-          <p className="my-5">Some random link again</p>
-          <p>Ullamcorper vivamus</p>
+          <h4 className="font-bold">קישורים</h4>
+          <p className="my-5">מדיה חברתית</p>
+          <p className="my-5">לערוץ הדיסקורד שלנו</p>
+          <p>הלקוח תמיד צודק</p>
         </div>
         {/* THIRD COLUMN */}
         <div className="mt-16 basis-1/4 sm:mt-0">
-          <h4 className="font-bold">Contact Us</h4>
-          <p className="my-5">Tempus metus mattis risus volutpat egestas.</p>
+          <h4 className="font-bold">ליצירת קשת</h4>
+          <p className="my-5">תוכלו לפנות אלינו דרך המייל או להתקשר</p>
           <p>(333)425-6825</p>
         </div>
       </div>
