@@ -6,9 +6,9 @@ import Home from "./components/pages/home/Home";
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
-    <Header />
-    <Home />
-    <Footer />
+      <Header />
+      <Home />
+      <Footer />
     </div>
   );
 }
