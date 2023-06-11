@@ -1,4 +1,5 @@
 import Card from "../../features/card/Card";
+import Button from "../../features/button/Button";
 
 export default function Home() {
   interface ProductsTypes {
@@ -62,9 +63,9 @@ export default function Home() {
           חיי היומיום שלכם. ממכשירי בית חכם עד גאדג'טים ידידותיים לסביבה, יש לנו
           את כל מה שאתם צריכים כדי לפשט ולחשמל את העולם שלכם.
         </p>
-        <button className="bg-blue-500 text-white px-6 py-2 mt-8 rounded-md hover:bg-blue-600 transition-colors">
+        <Button className="bg-blue-500 text-white px-6 py-2 mt-8 rounded-md hover:bg-blue-600 transition-colors">
           גלו עכשיו
-        </button>
+        </Button>
       </section>
       <div className=" h-52"></div>
       <section className=" p-16  ">
