@@ -9,7 +9,7 @@ const Header = () => {
                     <SocialLinks />
                 </div>
                 <div>
-                    <p>sign in</p>
+                    <p>התחברות</p>
                 </div>
             </nav>
             <div className="flex justify-between gap-8 mt-5 mb-4 mx-10">
@@ -19,7 +19,7 @@ const Header = () => {
                         המצבע הנ"ל החל מהתאריך 11/6/2023 ועד לתאריך 11/9/2023
                     </p>
                 </div>
-                {/* Temporary !! */}
+                {/* Temporary.. need to be switch to another pic !! */}
                 <div className="basis-full relative w-auto h-32 bg-wh-500">
                     <img src={Shopping} alt="" className="w-full h-full object-cover" />
                 </div>
