@@ -8,9 +8,6 @@ const Header = () => {
         <div>
           <p>התחברות</p>
         </div>
-        <div className="hidden md:block">
-          <SocialLinks />
-        </div>
         <div>
           <img
             src="/icons/icon.png"
