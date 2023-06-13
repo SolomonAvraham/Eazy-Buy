@@ -7,7 +7,7 @@ export default function Products() {
   return (
     <div className="bg-gray-200  flex flex-col items-center justify-center py-10 ">
       <h1 className=" text-8xl py-5">מוצרים</h1>
-      <div className="flex flex-row gap-10 p-10">
+      <div className="flex flex-wrap  p-10">
         {products.map((products, index) => (
           <Card
             title={products.title}
