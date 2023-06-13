@@ -1,44 +1,10 @@
 import Card from "../../features/card/Card";
 import Button from "../../features/button/Button";
 import Subscribe from "../../features/Subscribe/Subscribe";
+import { useProductStore } from "../../../store/store";
 
 export default function Home() {
-  interface ProductsTypes {
-    image: string;
-    title: any;
-    price: number;
-    info: string;
-  }
-
-  const products: ProductsTypes[] = [
-    {
-      image: "https://img.ksp.co.il/item/191322/b_1.jpg?v=1644474530",
-      title: "מוצר 1",
-      price: 49.99,
-      info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-    {
-      image: "https://img.ksp.co.il/item/191322/b_1.jpg?v=1644474530",
-
-      title: "מוצר 2",
-      price: 79.99,
-      info: "Nulla sollicitudin est et neque viverra, eget condimentum sem pretium.",
-    },
-    {
-      image: "https://img.ksp.co.il/item/191322/b_1.jpg?v=1644474530",
-
-      title: "מוצר 3",
-      price: 129.99,
-      info: "Duis feugiat dui non consequat aliquam. Proin et mauris felis.",
-    },
-    {
-      image: "https://img.ksp.co.il/item/191322/b_1.jpg?v=1644474530",
-
-      title: "מוצר 4",
-      price: 299.99,
-      info: "Vestibulum malesuada mauris a leo luctus, sed ullamcorper urna gravida.",
-    },
-  ];
+  const { products } = useProductStore();
 
   return (
     <div className="bg-gray-200  flex flex-col gap-10 ">
@@ -83,7 +49,7 @@ export default function Home() {
           />
         ))}
       </section>
-      <Subscribe/>
+      <Subscribe />
     </div>
   );
 }
