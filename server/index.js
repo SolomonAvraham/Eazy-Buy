@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import clientRoute from "./routes/client.js";
-import paymentRoute from "./routes/payment.js"
+import paymentRoute from "./routes/payment.js";
 
 dotenv.config();
 const app = express();
@@ -19,9 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/client", clientRoute);
-app.use("/payment",paymentRoute)
+app.use("/payment", paymentRoute);
 
 const PORT = process.env.PORT || 9000;
+
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,

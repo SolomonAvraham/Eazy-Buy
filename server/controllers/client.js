@@ -14,7 +14,7 @@ export const register = async (request, response) => {
       address,
       role,
     });
-
+  
     const savedUser = await newUser.save();
     response.status(201).json(savedUser);
   } catch (err) {
