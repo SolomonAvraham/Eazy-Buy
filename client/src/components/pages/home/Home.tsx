@@ -1,7 +1,7 @@
 import Card from "../../features/card/Card";
 import Button from "../../features/button/Button";
 import Subscribe from "../../features/Subscribe/Subscribe";
-import { useProductStore } from "../../../store/store";
+import { useProductStore } from "../../../store/productStore";
 
 export default function Home() {
   const { products } = useProductStore();
