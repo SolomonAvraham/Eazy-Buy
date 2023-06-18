@@ -1,4 +1,4 @@
-import { useProductStore } from "../../../store/store";
+import { useProductStore } from "../../../store/productStore";
 import Card from "../../features/card/Card";
 
 export default function Products() {

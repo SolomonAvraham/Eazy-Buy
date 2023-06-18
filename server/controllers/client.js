@@ -14,7 +14,7 @@ export const register = async (request, response) => {
       address,
       role,
     });
-  
+
     const savedUser = await newUser.save();
     response.status(201).json(savedUser);
   } catch (err) {
@@ -25,15 +25,17 @@ export const register = async (request, response) => {
 export const login = async (request, response) => {
   try {
     const { email, password } = request.body;
-    const user = await User.find({ email: email });
-    if (!user)
+    const user = await User.findOne({ email: email });
+    if (!user) {
       return response.status(400).json({ message: "User does not exist" });
+    }
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
+    if (!isMatch) {
       return response.status(400).json({ message: "Invalid credentials" });
+    }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     delete user.password;
-    response.status(200).json({ token, user });
+    return response.status(200).json({ token, user });
   } catch (error) {
     response.status(500).json({ error: error.message });
   }

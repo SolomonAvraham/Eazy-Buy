@@ -1,7 +1,7 @@
 import Card from "../../features/card/Card";
 import Button from "../../features/button/Button";
 import Subscribe from "../../features/Subscribe/Subscribe";
-import { useProductStore } from "../../../store/store";
+import { useProductStore } from "../../../store/productStore";
 
 export default function Home() {
   const { products } = useProductStore();
@@ -15,7 +15,7 @@ export default function Home() {
         <img
           src="/icons/icon.png"
           alt="icon"
-          className="  drop-shadow-2xl py-5"
+          className=" bg-white rounded-3xl  px-5 py-5  shadow-xl"
         />
         <img
           src="/home/main.png"

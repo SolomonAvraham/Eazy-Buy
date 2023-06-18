@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "formik": "^2.4.2",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.12.1",
+    "react-spinners": "^0.13.8",
     "react-stripe-elements": "^6.1.2",
     "stripe": "^12.9.0",
     "zod": "^3.21.4",

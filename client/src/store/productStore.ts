@@ -30,7 +30,7 @@ const products: Product[] = [
   },
 ];
 
-// Define the product type
+ 
 type Product = {
   image: string;
   title: string;
@@ -38,12 +38,12 @@ type Product = {
   info: string;
 };
 
-// Define the store type
+ 
 type ProductStore = {
   products: Product[];
 };
 
-// Create the store using Zustand
+ 
 export const useProductStore = create<ProductStore>(() => ({
   products: products,
 }));
