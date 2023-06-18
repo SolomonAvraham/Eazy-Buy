@@ -1,54 +1,27 @@
-// import React from 'react';
-// import { CardElement, injectStripe, ReactStripeElements } from 'react-stripe-elements';
+import Stripe from 'stripe';
 
-// interface PaymentFormProps extends ReactStripeElements.InjectedStripeProps { }
 
-// const PaymentForm: React.FC<PaymentFormProps> = ({ stripe }) => {
-//   const handleSubmit = async (event: React.FormEvent) => {
-//     event.preventDefault();
+const getStripeProducts = async () => {
+    const stripe = new Stripe(process.env.SECRET_KEY_STRIPE ?? '', {
+        apiVersion: '2022-11-15'
+    });
+    const response = await stripe.prices.list({
+        expand: ['data.product']
+    });
+    const prices = response.data
+    return prices
+}
 
-//     if (stripe) {
-//       // Collect payment details from the form
-//       const { token, error } = await stripe.createToken();
+const payment = () => {
+    const products = getStripeProducts();
+    console.log(products)
+    return (
+        <main className='p-4 flex flex-col'>
+            <div className='max-w-[1000px] w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
 
-//       if (error) {
-//         // Handle error
-//         console.error(error);
-//       } else {
-//         // Send payment token to server
-//         try {
-//           const response = await fetch('/charge', {
-//             method: 'POST',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify({
-//               token: token?.id,
-//               amount: 100, // Example amount, adjust as needed
-//               currency: 'ILS', // Example currency, adjust as needed
-//             }),
-//           });
+            </div>
+        </main>
+    )
+}
 
-//           const data = await response.json();
-
-//           if (data.success) {
-//             // Payment successful
-//             console.log('Payment successful:', data.charge);
-//           } else {
-//             // Payment failed
-//             console.log('Payment failed:', data.error);
-//           }
-//         } catch (error) {
-//           console.error('Error:', error);
-//         }
-//       }
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <CardElement />
-//       <button type="submit">Pay</button>
-//     </form>
-//   );
-// };
-
-// export default injectStripe(PaymentForm);
+export default payment
