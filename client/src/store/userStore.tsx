@@ -25,7 +25,8 @@ const userStore = create((set) => ({
         set({ user: user.user });
         set({ token: user.token });
 
-        Cookies.set("user", JSON.parse(user));
+        Cookies.set("user", JSON.stringify(user.user));
+        Cookies.set("token", JSON.stringify(user.token));
       } else {
         throw new Error("Invalid credentials");
       }
@@ -36,15 +37,16 @@ const userStore = create((set) => ({
     return set({ isLoading: false });
   },
   signOut: () => {
+    set({ isLoading: true });
     set({ user: null });
-    //   Cookies.("user");
-    //   Cookies.
+    set({ token: null });
+    Cookies.remove("user");
+    Cookies.remove("token");
+    set({ isLoading: false });
   },
   getUser: () => {
     return userStore.getState().user;
   },
 }));
-
- 
 
 export default userStore;
