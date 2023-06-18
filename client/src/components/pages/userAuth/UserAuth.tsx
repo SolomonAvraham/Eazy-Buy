@@ -3,7 +3,7 @@ import Button from "../../features/button/Button";
 import * as z from "zod";
 
 import { useNavigate } from "react-router-dom";
-
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { useFormik } from "formik";
 import { useMutation, QueryClient, QueryClientProvider } from "react-query";
 import userStore from "../../../store/userStore";
@@ -11,13 +11,11 @@ import userStore from "../../../store/userStore";
 const queryClient = new QueryClient();
 
 export default function UserAuth() {
-  const isLoadingLogin = userStore((state) => state.isLoading);
-
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <Login />
-        <SignUp />
+        {/* <SignUp /> */}
       </QueryClientProvider>
     </>
   );
@@ -82,6 +80,13 @@ export function Login() {
     { label: "אימייל", name: "email", type: "email" },
     { label: "סיסמה", name: "password", type: "password" },
   ];
+
+  if (isLoadingLogin)
+    return (
+      <div className=" h-screen flex justify-center items-center">
+        <ScaleLoader color="#657c78" height={30} width={30} />
+      </div>
+    );
 
   return (
     <form

@@ -26,7 +26,6 @@ export const login = async (request, response) => {
   try {
     const { email, password } = request.body;
     const user = await User.findOne({ email: email });
-    console.log(user);
     if (!user) {
       return response.status(400).json({ message: "User does not exist" });
     }

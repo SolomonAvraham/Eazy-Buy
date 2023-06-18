@@ -15,7 +15,7 @@ export default function Home() {
         <img
           src="/icons/icon.png"
           alt="icon"
-          className="  drop-shadow-2xl py-5"
+          className=" bg-white rounded-3xl  px-5 py-5  shadow-xl"
         />
         <img
           src="/home/main.png"

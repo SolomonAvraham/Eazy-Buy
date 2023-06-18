@@ -1,36 +1,35 @@
-import SocialLinks from "../SocialLinks/SocialLinks";
-import Shopping from "../../../assets/shopping.webp";
+import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="mb-5">
-      <nav className="flex justify-between items-center w-full bg-wh-900 text-wh-10 px-10 py-4 ">
-        <div>
-          <p>התחברות</p>
+    <header className="bg-black sticky top-0 z-50 shadow-xl ">
+      <nav className=" flex items-center justify-between px-7 py-2">
+        <div className="flex justify-evenly gap-4 md:gap-2 text-4xl md:text-3xl">
+          <div className="text-white hover:text-slate-300 cursor-pointer">
+            <FaShoppingCart />
+          </div>
+          <div className="flex gap-2  cursor-pointer">
+            <span className="  text-white hover:text-slate-300 ">
+              <FaUserCircle />
+            </span>
+            <span className=" text-white hover:text-slate-300 mt-3 text-sm">
+התחבר / הירשם            </span>
+          </div>
         </div>
-        <div>
-          <img
-            src="/icons/icon.png"
-            alt="icon"
-            width="25rem"
+
+        <div className=" flex items-center  gap-2 ">
+          <h3 className="sm:hidden md:block cursor-pointer text-white hover:text-slate-300">
+            <a href="/"> Eazy-Buy</a>
+          </h3>
+          <a href="/">
+            <img
+              className=" cursor-pointer w-12 drop-shadow-2xl bg-white hover:bg-slate-400 p-2 rounded-3xl"
+              src="/icons/icon.png"
+              alt="logo"
             />
+          </a>
         </div>
       </nav>
-      <div className="flex justify-between gap-8 mt-5 mb-4 mx-10">
-        <div className="basis-2/3 md:mt-3">
-          <h1 className="font-bold text-3xl md:text-4xl text-wh-500">
-            50% מבצע על ללקוחות רשומים
-          </h1>
-          <p className="text-sm mt-3">
-            המבצע הנ"ל במגבלת זמן, החל מהתאריך 11/6/2023 ועד לתאריך 11/9/2023
-          </p>
-        </div>
-        {/* Temporary.. need to be switch to another pic !! */}
-        <div className="basis-full relative w-auto h-32 bg-wh-500">
-          <img src={Shopping} alt="" className="w-full h-full object-cover" />
-        </div>
-        {/* ------- */}
-      </div>
     </header>
   );
 };
