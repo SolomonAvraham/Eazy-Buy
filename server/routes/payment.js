@@ -1,10 +1,6 @@
 import express from "express";
-import payment from "../controllers/payment.js";
-
+import payment from "../controllers/payment.js"
 const router = express.Router();
+router.post("/create-checkout-session", payment);
 
-router.post("/charge",payment);
-
-export default router;
-
-
+export default router
