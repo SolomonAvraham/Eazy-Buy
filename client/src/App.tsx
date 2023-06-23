@@ -4,7 +4,9 @@ import Footer from "./components/features/footer/Footer";
 import Header from "./components/features/header/Header";
 import Home from "./components/pages/home/Home";
 import Products from "./components/pages/products/Products";
-import UserAuth from "./components/pages/userAuth/UserAuth";
+import UserProfile from "./components/pages/userProfile/UserProfile";
+import Login from "./components/pages/loginPage/Login";
+import SignUp from "./components/pages/signUpPage/SignUpPage";
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<Products />} path="/products" />
-        <Route element={<UserAuth />} path="/userAuth" />
+        <Route element={<Login />} path="/login" />
+        <Route element={<SignUp />} path="/signup" />
+        <Route element={<UserProfile />} path="/userProfile" />
       </Routes>
       <Footer />
     </div>
