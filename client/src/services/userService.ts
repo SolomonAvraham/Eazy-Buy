@@ -30,7 +30,7 @@ export const userLogin = async (data: UserLogin) => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
 };
@@ -54,7 +54,7 @@ export const userSignUp = async (data: UserSignUp) => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
 };
@@ -72,7 +72,7 @@ export const getUserById = async (id: string) => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
 };

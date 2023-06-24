@@ -52,7 +52,11 @@ export const login = async (request, response) => {
 export const getUserById = async (req, res) => {
   try {
     const result = await User.findById(req.params.id);
-    res.status(200).json(result);
+    if (result) {
+      return res.status(200).json(result);
+    } else {
+      throw Error("Not Found");
+    }
   } catch (err) {
     res.status(500).json(err);
   }
