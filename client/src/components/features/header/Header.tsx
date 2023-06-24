@@ -25,24 +25,23 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  const loginQuery = useQuery<UserState[], Error>({
-    queryKey: ["user"],
-    queryFn: () => {
-      const userValue = Cookies.get("user");
-      const tokenValue = Cookies.get("token");
-      if (userValue && tokenValue) {
-        const user = JSON.parse(userValue) as string;
-        const token = JSON.parse(tokenValue) as string;
-        setUserObj((prevUser) => ({
-          ...prevUser,
-          user: user,
-          token: token,
-        }));
-        return userObj;
-      }
-      return null;
-    },
-  }); 
+  const userLogin = () => {
+    const userValue = Cookies.get("user");
+    const tokenValue = Cookies.get("token");
+    if (userValue && tokenValue) {
+      const user = JSON.parse(userValue) as string;
+      const token = JSON.parse(tokenValue) as string;
+      setUserObj((prevUser) => ({
+        ...prevUser,
+        user: user,
+        token: token,
+      }));
+      return userObj;
+    }
+    return null;
+  };
+
+  const { data, isError, isSuccess, isLoading } = useQuery(["user"], userLogin);
 
   const userSignOut = () => {
     const userValue = Cookies.get("user");
@@ -96,7 +95,7 @@ const Header = () => {
                     הירשם
                   </span>
                 </div>
-              ) : loginQuery.isLoading ? (
+              ) : isLoading ? (
                 <div className=" h-screen flex justify-center items-center">
                   <ScaleLoader color="#657c78" height={10} width={5} />
                 </div>
@@ -128,18 +127,18 @@ const Header = () => {
         <div
           className={
             !isOpen
-              ? " hidden"
-              : "flex flex-col items-center justify-center gap-5 w-full h-96  absolute top-18 md:right-1 md:h-fit md:p-10 md:w-72 md:rounded-b-2xl bg-slate-300 border-2 border-black border-opacity-10"
+              ? "   max-h-0"
+              : " transition-all duration-150 delay-75 ease-in-out  flex flex-col items-center justify-center gap-5 w-full h-96  absolute top-18 md:right-1 md:h-fit md:p-10 md:w-72 md:rounded-b-2xl bg-slate-300 border-2 border-black border-opacity-10"
           }
         >
-          {userObj.user && (
+          {isOpen && (
             <>
               <div
                 onClick={() => {
                   navigate("/userProfile");
                   setIsOpen(false);
                 }}
-                className=" cursor-pointer font-bold text-4xl hover:bg-black hover:w-72 text-center  p-1 hover:text-white"
+                className=" transition-all delay-300   cursor-pointer font-bold text-4xl hover:bg-black hover:w-72 text-center  p-1 hover:text-white"
               >
                 פרופיל
               </div>
