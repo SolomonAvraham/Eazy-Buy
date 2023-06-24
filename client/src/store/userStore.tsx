@@ -9,7 +9,9 @@ type SignInProps = {
 const userStore = create((set) => ({
   user: null,
   token: null,
+  error: null,
   isLoading: false,
+  showUserAuth: false,
   signIn: async (email: SignInProps, password: SignInProps) => {
     try {
       set({ isLoading: true });
@@ -25,9 +27,9 @@ const userStore = create((set) => ({
         set({ user: user.user });
         set({ token: user.token });
 
-        Cookies.set("user", JSON.parse(user));
-      } else {
-        throw new Error("Invalid credentials");
+        Cookies.set("user", JSON.stringify(user.user));
+        Cookies.set("token", JSON.stringify(user.token));
+        return set({ isLoading: false });
       }
     } catch (error) {
       console.error("Sign-in error:", error);
@@ -36,15 +38,21 @@ const userStore = create((set) => ({
     return set({ isLoading: false });
   },
   signOut: () => {
+    set({ isLoading: true });
     set({ user: null });
-    //   Cookies.("user");
-    //   Cookies.
+    set({ token: null });
+    Cookies.remove("user");
+    Cookies.remove("token");
+    set({ isLoading: false });
+    return;
   },
-  getUser: () => {
+  getUserById: () => {
     return userStore.getState().user;
   },
+  getUserByIdAuthPage: (userPage: boolean) => {
+    set({ showUserAuth: userPage });
+    return userStore.getState().showUserAuth;
+  },
 }));
-
- 
 
 export default userStore;
