@@ -62,7 +62,6 @@ export const userSignUp = async (data: UserSignUp) => {
 export const getUserById = async (id: string) => {
   try {
     const response = await fetch(`http://localhost:5001/client/user/${id}`);
-
     if (response.ok) {
       const responseData = await response.json();
       return responseData;

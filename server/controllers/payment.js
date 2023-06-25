@@ -1,29 +1,13 @@
 import Stripe from "stripe";
-const secretKey = process.env.SECRET_STRIPE;
-const stripe = Stripe(secretKey);
 
-const payment = async (request, response) => {
-  try {
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            currency: "ils",
-            product_data: {
-              name: "T-shirt",
-            },
-            unit_amount: 2000,
-          },
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
-      success_url: "http://http://127.0.0.1:5173/success",
-      cancel_url: "http://http://127.0.0.1:5173/cancel",
-    });
+export async function getStripeProducts(req, res) {
+  const stripe = new Stripe(process.env.SECRET_KEY_STRIPE ?? "", {
+    apiVersion: "2020-08-27",
+  });
+  const product = await stripe.prices.list({
+    expand: ["data.product"],
+  });
 
-    res.redirect(303, session.url);
-  } catch (err) {}
-};
+  return res.json(product.data);
+}
 
-export default payment;

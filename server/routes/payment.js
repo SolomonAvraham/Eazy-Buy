@@ -1,6 +1,7 @@
 import express from "express";
-import payment from "../controllers/payment.js"
-const router = express.Router();
-router.post("/create-checkout-session", payment);
+import { getStripeProducts } from "../controllers/payment.js";
 
-export default router
+const router = express.Router();
+router.get("/products", getStripeProducts);
+
+export default router;
