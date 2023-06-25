@@ -7,12 +7,19 @@ import * as z from "zod";
 import { userLogin } from "../../../services/userService";
 
 export default function Login() {
-  const navigate = useNavigate();
-
-  type User = {
-    password: string;
+  type FormValues = {
     email: string;
+    password: string;
+    [key: string]: string; 
   };
+
+  type FormFields = {
+    label: string;
+    name: string;
+    type: string;
+  };
+
+  const navigate = useNavigate();
 
   const validationSchema = z.object({
     email: z.string().email("אימייל לא תקין").nonempty("אימייל חסר"),
@@ -25,20 +32,14 @@ export default function Login() {
   const validate = (values: FormValues) => {
     try {
       validationSchema.parse(values);
-    } catch (error:unknown) {
-      return error.formErrors.fieldErrors;
+    } catch (errors:any) {
+      return errors.formErrors.fieldErrors;
     }
-  };
-
-  type FormValues = {
-    email: string;
-    password: string;
-    formErrors: unknown;
   };
 
   const loginMutation = useMutation(userLogin);
 
-  const formik = useFormik({
+  const formik = useFormik<FormValues>({
     initialValues: {
       email: "",
       password: "",
@@ -49,7 +50,7 @@ export default function Login() {
     },
   });
 
-  const formFields = [
+  const formFields: FormFields[] = [
     { label: "אימייל", name: "email", type: "email" },
     { label: "סיסמה", name: "password", type: "password" },
   ];
@@ -64,9 +65,9 @@ export default function Login() {
   if (loginMutation.isSuccess) {
     Cookies.set("user", JSON.stringify(loginMutation.data.user));
     Cookies.set("token", JSON.stringify(loginMutation.data.token));
-
     return navigate("/");
   }
+  
 
   return (
     <form onSubmit={formik.handleSubmit} className="   md:py-16  ">
@@ -81,10 +82,10 @@ export default function Login() {
         <p className=" font-semibold text-2xl ">Eazy Buy</p>
         {loginMutation.isError && (
           <div className=" font-bold text-xl text-red-600">
-            {loginMutation.error?.message}
+            {loginMutation.error && loginMutation.error?.message }
           </div>
         )}
-        {formFields.map((formField, index) => (
+        {formFields.map((formField, index: number) => (
           <div
             key={formField.label}
             className=" flex flex-col items-center justify-center gap-2"
@@ -93,7 +94,7 @@ export default function Login() {
               {formField.label}
             </label>
             {formik.touched[formField.name] && formik.errors[formField.name] ? (
-              <div key={formik.touched[formField.name]}>
+              <div key={String(formik.touched[formField.name])}>
                 {formik.errors[formField.name]}
               </div>
             ) : null}
