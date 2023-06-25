@@ -1,11 +1,14 @@
 import Card from "../../features/card/Card";
 import Button from "../../features/button/Button";
 import Subscribe from "../../features/Subscribe/Subscribe";
-import { useProductStore } from "../../../store/productStore";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../../../services/productsService";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const { products } = useProductStore();
-
+  const { data, isLoading, isError } = useQuery(["products"], getProducts);
+  const navigate = useNavigate();
   return (
     <div className="bg-gray-200  flex flex-col gap-10 ">
       <section className=" relative -z-0 flex flex-col items-center justify-center text-center px-4 py-8">
@@ -30,7 +33,10 @@ export default function Home() {
           חיי היומיום שלכם. ממכשירי בית חכם עד גאדג'טים ידידותיים לסביבה, יש לנו
           את כל מה שאתם צריכים כדי לפשט ולחשמל את העולם שלכם.
         </p>
-        <Button className="bg-blue-500 text-white px-6 py-2 mt-8 rounded-md hover:bg-blue-600 transition-colors">
+        <Button
+          onClick={() => navigate("/products")}
+          className="bg-blue-500 text-white px-6 py-2 mt-8 rounded-md hover:bg-blue-600 transition-colors"
+        >
           גלו עכשיו
         </Button>
       </section>
@@ -39,15 +45,28 @@ export default function Home() {
         <h1 className=" text-center py-10 font-medium  text-4xl md:text-6xl  text-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] ">
           מוצרים מובילים
         </h1>
-        {products.map((products, index) => (
-          <Card
-            title={products.title}
-            image={products.image}
-            price={products.price}
-            info={products.info}
-            key={index}
-          />
-        ))}
+        {isLoading && (
+          <div className=" h-screen flex justify-center items-center">
+            <ScaleLoader color="#657c78" height={30} width={30} />
+          </div>
+        )}
+        <div className=" px-10">
+            {data &&
+          data.map((product, index) => {
+            if (product && index < 4) {
+              return (
+                <Card
+                  title={product.product.name}
+                  image={product.product.images[0]}
+                  price={111}
+                  info={product.product.description}
+                  key={index}
+                />
+              );
+            }
+          })} 
+        </div>
+     
       </section>
       <Subscribe />
     </div>
