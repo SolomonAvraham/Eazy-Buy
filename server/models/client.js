@@ -20,10 +20,12 @@ const UserSchema = new mongoose.Schema(
       min: 6,
     },
     address: String,
-    role: String,
+    cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Property" }],
   },
   { timestamps: true }
 );
 
 const User = mongoose.model("User", UserSchema);
 export default User;
+
+
