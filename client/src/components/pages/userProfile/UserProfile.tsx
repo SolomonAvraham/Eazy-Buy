@@ -46,22 +46,35 @@ export default function UserProfile() {
     );
 
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-gray-100">
       <div className="flex flex-col items-center justify-center mt-10">
         {data && (
           <>
-            <h1 className=" py-5 text-7xl bg-red-100">
-              שלום, {data.fullName} .
-            </h1>
-            <div className=" text-center">
-              <h1 className=" py-5 text-2xl bg-red-100">פרטים משתמש</h1>
-              <div className="dd"> שם מלא : {data.fullName}</div>
-              <div className="dd">אימייל : {data.email}</div>
-              <div className="dd"> כתובת : {data.address}</div>
-              <div className="dd"> משתמש נוצר בתאריך : {data.createdAt}</div>
+            <h1 className="text-5xl text-red-700 mb-8">שלום, {data.fullName}.</h1>
+            <div className="bg-white p-6 rounded-xl shadow-xl">
+              <h2 className="text-2xl mb-4">פרטים משתמש</h2>
+              <div className="grid grid-cols-2 gap-4 text-lg">
+                <div className="flex items-center">
+                  <span className="font-bold mr-2">שם מלא:</span>
+                  {data.fullName}
+                </div>
+                <div className="flex items-center">
+                  <span className="font-bold mr-2">אימייל:</span>
+                  {data.email}
+                </div>
+                <div className="flex items-center">
+                  <span className="font-bold mr-2">כתובת:</span>
+                  {data.address}
+                </div>
+                <div className="flex items-center">
+                  <span className="font-bold mr-2">משתמש נוצר בתאריך:</span>
+                  {data.createdAt}
+                </div>
+              </div>
             </div>
-            <div className="ddd">
-              <h1 className=" py-5 text-6xl bg-red-100">עגלה</h1>
+            <div className="mt-8">
+              <h2 className="text-4xl mb-4">עגלה</h2>
+              {/*קומפוננטה של CART*/}
             </div>
           </>
         )}
