@@ -5,6 +5,7 @@ import Card from "../../features/card/Card";
 
 export default function Products() {
   const { data, isLoading, isError } = useQuery(["products"], getProducts);
+  console.log("🚀 ~ file: Products.tsx:8 ~ Products ~ data:", data)
 
   return (
     <div className="bg-gray-200  flex flex-col items-center justify-center py-10 ">
