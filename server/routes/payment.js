@@ -6,6 +6,6 @@ import {
 
 const router = express.Router();
 router.get("/products", getStripeProducts);
-router.put("/purchase",putStripePurchase);
+router.post("/create-checkout-session",putStripePurchase);
 
 export default router;
