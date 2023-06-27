@@ -11,3 +11,12 @@ export async function getStripeProducts(req, res) {
   return res.json(product.data);
 }
 
+
+export const putStripePurchase = async (request, response) => {
+  try{
+    
+  } catch (error) {
+    response.send(400).json({})
+  }
+}
+
