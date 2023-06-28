@@ -55,6 +55,7 @@ const Header = () => {
   };
 
   const lastPath = window.location.href.split("/").pop();
+  
   return (
     <header className="sticky top-0 z-50 bg-black shadow-xl ">
       <nav className=" flex items-center justify-between px-7 py-2">

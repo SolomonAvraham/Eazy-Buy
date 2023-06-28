@@ -11,6 +11,7 @@ import About from "./components/pages/about/About";
 import Cancel from "./components/features/cancel/cancel";
 import Success from "./components/features/success/success";
 import Contact from "./components/pages/contact/Contact";
+import CartComponent from "./components/pages/cart/Cart"
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         <Route element={<Contact />} path="/contact" />
         <Route element={<Cancel />} path="/cancel" />
         <Route element={<Success />} path="/success" />
+        <Route element={<CartComponent />} path="/cart" />
+        <Route element={<Cancel />} path="/cancel"/>
+        <Route element={<Success />} path="/success"/>
         <Route element={<Home />} path="/" />
         <Route element={<Products />} path="/products" />
         <Route element={<Login />} path="/login" />

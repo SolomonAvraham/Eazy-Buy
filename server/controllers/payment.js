@@ -41,3 +41,16 @@ export const putStripePurchase = async (request, response) => {
     response.status(400).json({ message: error.message });
   }
 };
+
+export const getStripeProductById = async (request, response) => {
+  const productId = request.params.id;
+  try {
+    const stripe = new Stripe(process.env.SECRET_KEY_STRIPE ?? "", {
+      apiVersion: "2020-08-27",
+    });
+    const product = await stripe.products.retrieve(productId);
+    return response.json(product);
+  } catch (error) {
+    response.status(400).json({ message: error.message });
+  }
+};
