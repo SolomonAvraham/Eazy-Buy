@@ -19,7 +19,7 @@ export const putStripePurchase = async (request, response) => {
     const stripe = new Stripe(process.env.SECRET_KEY_STRIPE ?? "", {
       apiVersion: "2020-08-27",
     });
-    const session = stripe.checkout.sessions.create({
+    const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           price_data: {
@@ -36,7 +36,7 @@ export const putStripePurchase = async (request, response) => {
       success_url: "http://127.0.0.1:5173/success",
       cancel_url: "http://127.0.0.1:5173/cancel",
     });
-    response.redirect(200, session.url);
+    response.status(200).json({ redirectUrl: session.url });
   } catch (error) {
     response.status(400).json({ message: error.message });
   }
