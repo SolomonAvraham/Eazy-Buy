@@ -1,8 +1,7 @@
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useState, useEffect } from "react";
-import userStore from "../../../store/userStore";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
@@ -20,7 +19,6 @@ const Header = () => {
     user: "",
     token: "",
   });
-
   const [isOpen, setIsOpen] = useState<IsOpenState>(false);
 
   const navigate = useNavigate();
@@ -56,11 +54,13 @@ const Header = () => {
     }
   };
 
+  const lastPath = window.location.href.split("/").pop();
+  
   return (
-    <header className="bg-black sticky top-0 z-50 shadow-xl ">
+    <header className="sticky top-0 z-50 bg-black shadow-xl ">
       <nav className=" flex items-center justify-between px-7 py-2">
-        <div className="flex justify-evenly gap-4 md:gap-2 text-4xl md:text-3xl">
-          <div className="text-white hover:text-slate-300 cursor-pointer">
+        <div className="flex justify-evenly gap-4 text-4xl md:gap-2 md:text-3xl">
+          <div className="cursor-pointer text-white hover:text-slate-300">
             <FaShoppingCart />
           </div>
           <div className="flex gap-2 ">
@@ -68,39 +68,15 @@ const Header = () => {
               onClick={() => setIsOpen((isOpen: IsOpenState) => !isOpen)}
               className={`${
                 !userObj.user?.fullName
-                  ? " text-white hover:text-slate-300  cursor-pointer"
-                  : " text-amber-300 hover:text-amber-200  cursor-pointer"
+                  ? " cursor-pointer text-white  hover:text-slate-300"
+                  : " cursor-pointer text-amber-300  hover:text-amber-200"
               } `}
             >
               <FaUserCircle />
             </span>
-            <div className=" text-white md:mt-3 text-sm">
-              {!userObj.user ? (
-                <div className=" text-2xl p-1 md:p-0  tracking-widest md:text-xs md:mt-1">
-                  <span
-                    onClick={() => {
-                      navigate("/login");
-                    }}
-                    className=" font-bold hover:text-slate-300 cursor-pointer"
-                  >
-                    התחבר
-                  </span>{" "}
-                  /{" "}
-                  <span
-                    onClick={() => {
-                      navigate("/signup");
-                    }}
-                    className=" font-bold hover:text-slate-300 cursor-pointer"
-                  >
-                    הירשם
-                  </span>
-                </div>
-              ) : isLoading ? (
-                <div className=" h-screen flex justify-center items-center">
-                  <ScaleLoader color="#657c78" height={10} width={5} />
-                </div>
-              ) : (
-                <span className=" font-thin cursor-default">
+            <div className=" text-sm text-white md:mt-3">
+              {userObj.user && (
+                <span className="hidden  cursor-default font-thin md:block">
                   שלום, {userObj.user?.fullName}.
                 </span>
               )}
@@ -111,47 +87,110 @@ const Header = () => {
         <div className=" flex items-center  gap-2 ">
           <h3
             onClick={() => navigate("/")}
-            className="sm:hidden md:block cursor-pointer text-white hover:text-slate-300"
+            className="cursor-pointer text-white hover:text-slate-300 sm:hidden md:block"
           >
             Eazy-Buy
           </h3>
           <img
             onClick={() => navigate("/")}
-            className=" cursor-pointer w-12 drop-shadow-2xl bg-white hover:bg-slate-400 p-2 rounded-3xl"
+            className=" w-12 cursor-pointer rounded-3xl bg-white p-2 drop-shadow-2xl hover:bg-slate-400"
             src="/icons/icon.png"
             alt="logo"
           />
         </div>
       </nav>
-      {userObj.user && (
+      {!userObj.user ? (
         <div
           className={
             !isOpen
               ? "   max-h-0"
-              : " transition-all duration-150 delay-75 ease-in-out  flex flex-col items-center justify-center gap-5 w-full h-96  absolute top-18 md:right-1 md:h-fit md:p-10 md:w-72 md:rounded-b-2xl bg-slate-300 border-2 border-black border-opacity-10"
+              : " top-18 absolute flex h-96  w-full flex-col items-center justify-center gap-5 border-2 border-black  border-opacity-10 bg-slate-300 transition-all delay-75 duration-150 ease-in-out md:right-1 md:h-fit md:w-72 md:rounded-b-2xl md:p-10"
           }
         >
           {isOpen && (
             <>
-              <div
-                onClick={() => {
-                  navigate("/userProfile");
-                  setIsOpen(false);
-                }}
-                className=" transition-all delay-300   cursor-pointer font-bold text-4xl hover:bg-black hover:w-72 text-center  p-1 hover:text-white"
-              >
-                פרופיל
-              </div>
-              <div
-                className=" text-2xl font-bold cursor-pointer hover:text-white"
-                onClick={userSignOut}
-              >
-                יציאה
+              <div className="   text-sm md:mt-3">
+                {!userObj.user && (
+                  <div className="flex flex-col gap-5 p-1 text-2xl tracking-widest  md:mt-1 md:p-0 md:text-xs">
+                    {[
+                      { route: "/login", name: " התחבר " },
+                      { route: "/signup", name: " הירשם " },
+                    ].map((item) => (
+                      <div
+                        key={item.name}
+                        onClick={() => {
+                          navigate(item.route);
+                          setIsOpen(false);
+                        }}
+                        className=" cursor-pointer text-xl font-bold hover:text-slate-600"
+                      >
+                        {item.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </>
           )}
         </div>
+      ) : (
+        <div
+          className={
+            !isOpen
+              ? "   max-h-0"
+              : " top-18 absolute flex h-96  w-full flex-col items-center justify-center gap-5 border-2 border-black  border-opacity-10 bg-slate-300 transition-all delay-75 duration-150 ease-in-out md:right-1 md:h-fit md:w-72 md:rounded-b-2xl md:p-10"
+          }
+        >
+          {isOpen && (
+            <>
+              <span className="block  cursor-default text-5xl font-bold md:hidden ">
+                שלום, {userObj.user?.fullName} .
+                <hr className=" mt-2 h-1 bg-black bg-opacity-10" />
+              </span>
+              {[
+                { route: "/userProfile", name: " פרופיל " },
+                { onclick: userSignOut, name: " יציאה " },
+              ].map((item) => (
+                <div
+                  key={item.name}
+                  onClick={
+                    item.onclick
+                      ? () => {
+                          item.onclick();
+                          setIsOpen(false);
+                        }
+                      : () => {
+                          navigate(item.route);
+                          setIsOpen(false);
+                        }
+                  }
+                  className=" mt-5 cursor-pointer text-4xl font-bold hover:text-slate-600 md:text-xl"
+                >
+                  {item.name}
+                </div>
+              ))}
+            </>
+          )}
+        </div>
       )}
+      <div className="  absolute left-16 right-16 top-16 -z-10 flex justify-center  md:left-28   md:right-28 md:gap-1  ">
+        {[
+          { route: "products", name: "מוצרים" },
+          { route: "about", name: "קצת עלינו" },
+          { route: "contact", name: "צור קשר" },
+        ].map((element) => (
+          <div
+            key={element.name}
+            onClick={() => navigate(`/${element.route}`)}
+            className={`${
+              lastPath === element.route &&
+              " bg-slate-600 hover:text-slate-400 "
+            } cursor-pointer rounded-b-2xl bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
+          >
+            {element.name}
+          </div>
+        ))}
+      </div>
     </header>
   );
 };

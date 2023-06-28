@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
 import Footer from "./components/features/footer/Footer";
 import Header from "./components/features/header/Header";
 import Home from "./components/pages/home/Home";
@@ -7,9 +7,10 @@ import Products from "./components/pages/products/Products";
 import UserProfile from "./components/pages/userProfile/UserProfile";
 import Login from "./components/pages/loginPage/Login";
 import SignUp from "./components/pages/signUpPage/SignUpPage";
-import About from "./components/pages/about/about";
+import About from "./components/pages/about/About";
 import Cancel from "./components/features/cancel/cancel";
 import Success from "./components/features/success/success";
+import Contact from "./components/pages/contact/Contact";
 import CartComponent from "./components/pages/cart/Cart"
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
       <Header />
       <Routes>
         <Route element={<About />} path="/about" />
+        <Route element={<Contact />} path="/contact" />
+        <Route element={<Cancel />} path="/cancel" />
+        <Route element={<Success />} path="/success" />
         <Route element={<CartComponent />} path="/cart" />
         <Route element={<Cancel />} path="/cancel"/>
         <Route element={<Success />} path="/success"/>

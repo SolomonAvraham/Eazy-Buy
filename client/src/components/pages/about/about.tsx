@@ -1,17 +1,39 @@
-
-const Application = () => {
-    return (
-        <div className="bg-gray-100 min-h-screen">
-            <main className="container mx-auto px-4 py-8">
-                <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">About</h2>
-                    <p className="text-gray-800">
-                        Welcome to My Awesome Application! It is meticulously designed to deliver an unparalleled user experience.
-                    </p>
-                </section>
-            </main>
+export default function About() {
+  return (
+    <>
+      <div className="  bg-gray-200   ">
+        <div className=" flex items-center  justify-center h-screen p-10 ">
+          <div className="  flex flex-col items-center justify-center bg-slate-200 rounded-2xl shadow-2xl mt-24 mb-24">
+            <h1 className=" text-6xl mt-5">Eazy-Buy</h1>
+            <hr className="bg-gray-500 w-1/3 bg-opacity-10 mt-3 h-1" />
+            <h3 className=" text-xl mt-3 font-bold ">קצת עלינו</h3>
+            <hr className="bg-gray-500 w-1/6 bg-opacity-10 h-1" />
+            <p className=" text-center text-lg font-bold mt-5 p-10 tracking-wider">
+              ברוכים הבאים לאתר "איזי-ביי"! אנחנו שמחים להציע לכם חווית קניות
+              מקוונת מושלמת בעולם האלקטרוניקה. ב"איזי-ביי" אנחנו מתמחים במכירה
+              של מוצרים אלקטרוניים איכותיים במחירים נוחים ומשתלמים. האתר שלנו
+              מציע מגוון מוצרים רחב ומגוון של מותגים מובילים בתחום האלקטרוניקה.
+              מבחר המוצרים שלנו כולל סמארטפונים, מחשבים ניידים, מצלמות,
+              טלוויזיות, ציוד סאונד, מוצרי חשמל ביתיים ועוד. אנו שואפים לספק לכם
+              את המוצרים הטובים ביותר עם טכנולוגיה מתקדמת וביצועים ברמה הגבוהה
+              ביותר. בנוסף למגוון המוצרים, אנחנו מקנים מרכיבי איכות ומעניקים
+              שירות לקוחות מעולה. אנחנו מקפידים על אמינות, אבטחת מידע ומהירות
+              במשלוח, כדי שתוכלו ליהנות מחווית קניות מהנה ולהשיג את המוצר שאתם
+              מחפשים בקלות ובנוחות. באתר שלנו תוכלו למצוא מידע מפורט על כל מוצר,
+              כולל מפרטים טכניים, תמונות וחוות דעת מתוך חוויות משתמשים אמיתיים.
+              כל זאת כדי שתוכלו לקבל את המידע המ לא ולבצע בחירה מושכת ומושכלת.
+              אנחנו מאמינים שקנייה מקוונת צריכה להיות פשוטה ונוחה, ועל כן פיתחנו
+              ממשק משתמש ידידותי ונוח המאפשר חיפוש מהיר וניווט קל בין המוצרים.
+              בנוסף, אנחנו מספקים שירות לקוחות מקצועי שמוכן לעזור בכל שאלה או
+              בעיה שתיתקלו בה. אז אל תתלבטו עוד! היכנסו לאתר "איזי-ביי" עכשיו
+              וגלו את העולם המרתק של האלקטרוניקה. אנחנו כאן כדי לספק לכם את
+              המוצרים המובילים והמתקדמים ביותר בשוק, ולהבטיח שתקבלו את השירות
+              הטוב ביותר. "איזי-ביי" - הקניות האלקטרוניות שלכם!
+            </p>
+            <img src="/icons/icon.png" alt="icon" className=" mt-5  " />
+          </div>
         </div>
-    );
-};
-
-export default Application;
+      </div>
+    </>
+  );
+}

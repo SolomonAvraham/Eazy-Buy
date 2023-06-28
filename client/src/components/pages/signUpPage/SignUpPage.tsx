@@ -2,10 +2,8 @@ import * as z from "zod";
 import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useFormik } from "formik";
-import userStore from "../../../store/userStore";
 import { useMutation } from "@tanstack/react-query";
 import { userSignUp } from "../../../services/userService";
-import { useState } from "react";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -18,13 +16,12 @@ export default function SignUp() {
       .min(6, "סיסמה חייבת להיות לפחות 6 תווים")
       .nonempty("סיסמה חסרה"),
     address: z.string().nonempty("כתובת חסרה"),
-    role: z.string().nonempty("Role is required"),
   });
 
   const validate = (values: FormValues) => {
     try {
       validationSchema.parse(values);
-    } catch (error ) {
+    } catch (error) {
       return error?.formErrors.fieldErrors;
     }
   };
@@ -34,7 +31,6 @@ export default function SignUp() {
     email: string;
     password: string;
     address: string;
-    role: string;
   };
 
   const signUpMutation = useMutation(userSignUp);
@@ -45,7 +41,6 @@ export default function SignUp() {
       email: "",
       password: "",
       address: "",
-      role: "",
     },
 
     validate,
@@ -59,7 +54,6 @@ export default function SignUp() {
     { label: "אימייל", name: "email", type: "email" },
     { label: "סיסמה", name: "password", type: "password" },
     { label: "כתובת", name: "address", type: "text" },
-    { label: "תפקיד", name: "role", type: "text" },
   ];
 
   if (signUpMutation.isLoading)
@@ -74,7 +68,10 @@ export default function SignUp() {
   }
 
   return (
-    <form onSubmit={formik.handleSubmit} className=" min-h-screen p-10 md:p-0  md:py-16 ">
+    <form
+      onSubmit={formik.handleSubmit}
+      className=" min-h-screen p-10 md:p-0  md:py-16 "
+    >
       <div className=" flex flex-col items-center justify-center gap-5 border-black border-2 md:w-1/2 h-screen md:h-fit   bg-gray-100 mx-auto md:p-5 border-opacity-10 rounded-xl shadow-xl">
         <h1 className=" pt-4 text-6xl">הירשמות</h1>{" "}
         <hr className=" bg-black h-1 w-1/2 bg-opacity-5 rounded-2xl" />
