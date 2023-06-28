@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import User from "../models/client";
+import User from "../models/client.js";
 
 export async function getStripeProducts(request, response) {
   try {
