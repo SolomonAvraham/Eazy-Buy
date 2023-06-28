@@ -10,6 +10,7 @@ import SignUp from "./components/pages/signUpPage/SignUpPage";
 import About from "./components/pages/about/about";
 import Cancel from "./components/features/cancel/cancel";
 import Success from "./components/features/success/success";
+import CartComponent from "./components/pages/cart/Cart"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Header />
       <Routes>
         <Route element={<About />} path="/about" />
+        <Route element={<CartComponent />} path="/cart" />
         <Route element={<Cancel />} path="/cancel"/>
         <Route element={<Success />} path="/success"/>
         <Route element={<Home />} path="/" />
