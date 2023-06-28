@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import User from "../models/client";
 
 export async function getStripeProducts(request, response) {
   try {
@@ -52,5 +53,20 @@ export const getStripeProductById = async (request, response) => {
     return response.json(product);
   } catch (error) {
     response.status(400).json({ message: error.message });
+  }
+};
+
+export const updateUserCart = async (request, response) => {
+  try {
+    const { userId, product } = request.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return response.status(404).json({ error: "User not found" });
+    }
+    user.products.push(product);
+    await user.save();
+    response.json({ message: "User cart updated successfully" });
+  } catch (error) {
+    response.status(500).json({ error: "Internal server error" });
   }
 };
