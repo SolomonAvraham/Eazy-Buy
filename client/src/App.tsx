@@ -12,10 +12,13 @@ import Cancel from "./components/features/cancel/cancel";
 import Success from "./components/features/success/success";
 import Contact from "./components/pages/contact/Contact";
 import CartComponent from "./components/pages/cart/Cart"
+import ShowProduct from "./components/pages/showProuduct/ShowProduct";
+
+
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header />
       <Routes>
         <Route element={<About />} path="/about" />
@@ -23,10 +26,11 @@ function App() {
         <Route element={<Cancel />} path="/cancel" />
         <Route element={<Success />} path="/success" />
         <Route element={<CartComponent />} path="/cart" />
-        <Route element={<Cancel />} path="/cancel"/>
-        <Route element={<Success />} path="/success"/>
+        <Route element={<Cancel />} path="/cancel" />
+        <Route element={<Success />} path="/success" />
         <Route element={<Home />} path="/" />
         <Route element={<Products />} path="/products" />
+        <Route element={<ShowProduct />} path="/product/:id" />
         <Route element={<Login />} path="/login" />
         <Route element={<SignUp />} path="/signup" />
         <Route element={<UserProfile />} path="/userProfile" />

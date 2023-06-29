@@ -5,21 +5,29 @@ interface CardProps {
   title: string;
   price: number;
   info: string;
+  onClick?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ image, title, price, info }) => {
+const Card: React.FC<CardProps> = ({ image, title, price, info, onClick }) => {
   return (
-    <div className=" bg-white grid md:grid-cols-2 md:grid-rows-1 rounded-lg shadow-md px-5 py-6 mt-5">
+    <div
+      onClick={onClick}
+      className=" mt-5 grid rounded-lg bg-white px-5 py-6 shadow-md md:grid-cols-2 md:grid-rows-1 "
+    >
       <img
         src={image}
         alt={title}
-        className="w-96  h-52 object-contain mb-4 "
+        className="mb-4  h-52 w-96 cursor-pointer object-contain"
       />
       <div className="flex flex-col justify-between p-5 ">
-        <h2 className="text-xl font-semibold mb-2 text-center">{title}</h2>
-        <p className="text-sm text-gray-500 mb-2 text-center">{info}</p>
-        <p className="text-gray-500 mb-2 "> ₪ {price}</p>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg">
+        <h2 className="mb-2 cursor-pointer text-center text-xl font-semibold">
+          {title}
+        </h2>
+        <p className="mb-2 cursor-pointer text-center text-sm text-gray-500">
+          {info}
+        </p>
+        <p className="mb-2 text-gray-500 "> ₪ {price}</p>
+        <button className="rounded-lg bg-black px-4 py-2 font-semibold text-white hover:bg-blue-900">
           הוסף לעגלה
         </button>
       </div>
