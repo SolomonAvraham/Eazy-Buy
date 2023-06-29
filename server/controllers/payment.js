@@ -63,7 +63,7 @@ export const updateUserCart = async (request, response) => {
     if (!user) {
       return response.status(404).json({ error: "User not found" });
     }
-    user.products.push(product);
+    user.cart.push(product);
     await user.save();
     response.json({ message: "User cart updated successfully" });
   } catch (error) {
