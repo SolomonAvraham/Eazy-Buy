@@ -59,11 +59,13 @@ export const getStripeProductById = async (request, response) => {
 export const updateUserCart = async (request, response) => {
   try {
     const { userId, product } = request.body;
+    console.log(product)
     const user = await User.findById(userId);
     if (!user) {
       return response.status(404).json({ error: "User not found" });
     }
-    user.cart.push(product);
+    user.cart.push({product});
+    console.log(user.cart.push({product}))
     await user.save();
     response.json({ message: "User cart updated successfully" });
   } catch (error) {
@@ -75,10 +77,11 @@ export const deleteUserCart = async (request, response) => {
   try {
     const { userId, productId } = request.body;
     const user = await User.findById(userId);
+    console.log("User cart:", user.cart );
     if (!user) {
       return response.status(404).json({ error: "User not found" });
     }
-    const cartIndex = user.cart.findIndex((item) => item.id === productId);
+    const cartIndex = user.cart.findIndex((item) => item === productId);
     if (cartIndex === -1) {
       return response.status(404).json({ error: "Product not found in cart" });
     }
@@ -89,4 +92,3 @@ export const deleteUserCart = async (request, response) => {
     response.status(500).json({ error: "Internal server error" });
   }
 };
-
