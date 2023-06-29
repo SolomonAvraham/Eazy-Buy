@@ -70,3 +70,22 @@ export const updateUserCart = async (request, response) => {
     response.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const deleteUserCart = async (request, response) => {
+  try {
+    const { userId, productId } = request.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return response.status(404).json({ error: "User not found" });
+    }
+    const cartIndex = user.cart.findIndex((item) => item.id === productId);
+    if (cartIndex === -1) {
+      return response.status(404).json({ error: "Product not found in cart" });
+    }
+    user.cart.splice(cartIndex, 1);
+    await user.save();
+    response.json({ message: "Product removed from cart successfully" });
+  } catch (error) {
+    response.status(500).json({ error: "Internal server error" });
+  }
+};
