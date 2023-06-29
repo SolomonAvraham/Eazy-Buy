@@ -39,6 +39,8 @@ const Header = () => {
     return null;
   };
 
+  console.log(userObj);
+  
   const { data, isError, isSuccess, isLoading } = useQuery(["user"], userLogin);
 
   const userSignOut = () => {
