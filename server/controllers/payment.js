@@ -55,7 +55,6 @@ export const getStripeProductById = async (request, response) => {
     response.status(400).json({ message: error.message });
   }
 };
-<<<<<<< HEAD
 
 export const updateUserCart = async (request, response) => {
   try {
@@ -93,5 +92,3 @@ export const deleteUserCart = async (request, response) => {
     response.status(500).json({ error: "Internal server error" });
   }
 };
-=======
->>>>>>> ddd
