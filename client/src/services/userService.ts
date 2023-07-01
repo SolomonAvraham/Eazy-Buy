@@ -8,7 +8,6 @@ type UserSignUp = {
   email: string;
   password: string;
   address: string;
-  role: string;
 };
 
 export const userLogin = async (data: UserLogin) => {
@@ -75,3 +74,5 @@ export const getUserById = async (id: string) => {
     throw new Error(error.message);
   }
 };
+
+
