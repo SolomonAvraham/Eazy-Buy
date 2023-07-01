@@ -75,4 +75,30 @@ export const getUserById = async (id: string) => {
   }
 };
 
+export const addToCart = async (productId: string, id: string) => {
+  try {
+    const response = await fetch('http://localhost:5001/api/stripe/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: id,
+        product: productId,
+      }),
+    });
 
+    if (response.ok) {
+      const responseData = await response.json()
+    } else {
+      const errorResponse = await response.json()
+      throw new Error(
+        errorResponse.message || "ההוספה נכשלה"
+      )
+    }
+  } catch (error: any) {
+    throw new Error(
+      error.message
+    )
+  }
+};

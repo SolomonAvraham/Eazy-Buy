@@ -4,7 +4,11 @@ import { getProductById } from "../../../services/productsService";
 import { useQuery } from "@tanstack/react-query";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-export default function ShowProduct() {
+type Props = {
+  addToCart: (productId: string) => void
+}
+
+export default function ShowProduct({ addToCart }: Props) {
   const { id } = useParams<string>();
   const {
     data: product,
@@ -13,6 +17,7 @@ export default function ShowProduct() {
   } = useQuery(["productById"], {
     queryFn: () => getProductById(id),
   });
+
 
   return (
     <>
@@ -30,6 +35,7 @@ export default function ShowProduct() {
         <div className="flex  w-1/3 items-center justify-center">
           {product && (
             <Card
+              onClick={()=>{}}
               title={product?.name}
               image={product?.images[0]}
               price={111}
