@@ -87,9 +87,9 @@ export const addToCart = async (productId: string, id: string) => {
         product: productId,
       }),
     });
-
     if (response.ok) {
       const responseData = await response.json()
+      return responseData.json()
     } else {
       const errorResponse = await response.json()
       throw new Error(
