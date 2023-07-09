@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
       min: 6,
     },
     address: String,
-    cart: [{ type: String }],
+    cart: [{ type: Object }],
   },
   { timestamps: true }
 );
