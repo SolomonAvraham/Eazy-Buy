@@ -82,14 +82,16 @@ export const deleteUserCart = async (request, response) => {
       return response.status(404).json({ error: "User not found" });
     }
 
-    const productExist = user.cart.find((product) => product.id === productId);
+    const cart = user.cart;
+
+    const productExist = cart.find((cart) => cart.product.id === productId);
 
     if (productExist === undefined) {
       return response.status(404).json({ error: "Product not found in cart" });
     }
 
-    const productIndex = user.cart.findIndex((product) => {
-      return product.id === productId;
+    const productIndex = user.cart.findIndex((cart) => {
+      return cart.product.id === productId;
     });
 
     if (productIndex === -1) {
@@ -106,8 +108,3 @@ export const deleteUserCart = async (request, response) => {
     response.status(500).json({ error: "Internal server error" });
   }
 };
-<<<<<<< HEAD
-//prod_O6JbppxeVmA9fv
-//649c65c800941dd2444f7a05
-=======
->>>>>>> mmm
