@@ -16,28 +16,29 @@ export async function getStripeProducts(request, response) {
 }
 
 export const putStripePurchase = async (request, response) => {
+  const lineItems = request.body;
+
   try {
+    if (lineItems.length === 0) {
+      return response.status(404).send({ message: "Products not found" });
+    }
+
     const stripe = new Stripe(process.env.SECRET_KEY_STRIPE ?? "", {
       apiVersion: "2020-08-27",
     });
+
     const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            currency: "ILS",
-            product_data: {
-              name: "מסך מחשב",
-            },
-            unit_amount: 5000,
-          },
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems.map((item) => ({
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      currency: "ILS",
       mode: "payment",
       success_url: "http://127.0.0.1:5173/success",
       cancel_url: "http://127.0.0.1:5173/cancel",
     });
-    response.status(200).json({ redirectUrl: session.url });
+
+    return response.status(200).json({ redirectUrl: session.url });
   } catch (error) {
     response.status(400).json({ message: error.message });
   }
@@ -59,13 +60,12 @@ export const getStripeProductById = async (request, response) => {
 export const updateUserCart = async (request, response) => {
   try {
     const { userId, product } = request.body;
-    console.log(product)
+    console.log(userId, product);
     const user = await User.findById(userId);
     if (!user) {
       return response.status(404).json({ error: "User not found" });
     }
-    user.cart.push({product});
-    console.log(user.cart.push({product}))
+    user.cart.push(product);
     await user.save();
     response.json({ message: "User cart updated successfully" });
   } catch (error) {
@@ -77,20 +77,37 @@ export const deleteUserCart = async (request, response) => {
   try {
     const { userId, productId } = request.body;
     const user = await User.findById(userId);
-    console.log("User cart:", user.cart );
+
     if (!user) {
       return response.status(404).json({ error: "User not found" });
     }
-    const cartIndex = user.cart.findIndex((item) => item === productId);
-    if (cartIndex === -1) {
+
+    const productExist = user.cart.find((product) => product.id === productId);
+
+    if (productExist === undefined) {
       return response.status(404).json({ error: "Product not found in cart" });
     }
-    user.cart.splice(cartIndex, 1);
+
+    const productIndex = user.cart.findIndex((product) => {
+      return product.id === productId;
+    });
+
+    if (productIndex === -1) {
+      return response.status(404).json({ error: "Product not found in cart" });
+    }
+
+    user.cart.splice(productIndex, 1);
     await user.save();
-    response.json({ message: "Product removed from cart successfully" });
+
+    response.json({
+      message: "Product removed from cart successfully",
+    });
   } catch (error) {
     response.status(500).json({ error: "Internal server error" });
   }
 };
+<<<<<<< HEAD
 //prod_O6JbppxeVmA9fv
 //649c65c800941dd2444f7a05
+=======
+>>>>>>> mmm

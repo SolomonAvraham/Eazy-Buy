@@ -2,8 +2,8 @@ import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import ScaleLoader from "react-spinners/ScaleLoader";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getUserById } from "../../../services/userService";
 
 const Header = () => {
   type UserState = {
@@ -19,29 +19,34 @@ const Header = () => {
     user: "",
     token: "",
   });
+
   const [isOpen, setIsOpen] = useState<IsOpenState>(false);
 
   const navigate = useNavigate();
 
-  const userLogin = () => {
+  const queryClient = useQueryClient();
+
+  const userLogin = async () => {
     const userValue = Cookies.get("user");
     const tokenValue = Cookies.get("token");
     if (userValue && tokenValue) {
-      const user = JSON.parse(userValue) as string;
+      const userId = JSON.parse(userValue) as string;
       const token = JSON.parse(tokenValue) as string;
+      const user = await getUserById(userId);
       setUserObj((prevUser) => ({
         ...prevUser,
         user: user,
         token: token,
       }));
-      return userObj;
+
+      return { user, token };
     }
     return null;
   };
 
-  console.log(userObj);
-  
-  const { data, isError, isSuccess, isLoading } = useQuery(["user"], userLogin);
+  const { data } = useQuery(["user"], userLogin);
+
+  const cart = data?.user.cart ?? null;
 
   const userSignOut = () => {
     const userValue = Cookies.get("user");
@@ -53,16 +58,32 @@ const Header = () => {
       }));
       Cookies.remove("user");
       Cookies.remove("token");
+
+      queryClient.invalidateQueries(["user"]);
     }
   };
 
   const lastPath = window.location.href.split("/").pop();
-  
+
   return (
     <header className="sticky top-0 z-50 bg-black shadow-xl ">
       <nav className=" flex items-center justify-between px-7 py-2">
-        <div className="flex justify-evenly gap-4 text-4xl md:gap-2 md:text-3xl">
-          <div className="cursor-pointer text-white hover:text-slate-300">
+        <div className="flex justify-evenly gap-4 text-4xl md:gap-2 md:text-4xl">
+          <div
+            onClick={() => navigate("/cart")}
+            className={`${
+              !userObj.user?.cart
+                ? " cursor-pointer text-white  hover:text-slate-300"
+                : " cursor-pointer text-amber-300  hover:text-amber-200"
+            } `}
+          >
+            {cart && (
+              <div className=" absolute right-4 top-6 h-5 w-5 rounded-2xl bg-black outline-dotted outline-1 outline-white">
+                <div className=" text-center text-sm font-thin text-white ">
+                  {cart.length}
+                </div>
+              </div>
+            )}
             <FaShoppingCart />
           </div>
           <div className="flex gap-2 ">

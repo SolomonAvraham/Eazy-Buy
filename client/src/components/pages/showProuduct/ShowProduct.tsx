@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import Card from "../../features/card/Card";
-import { getProductById } from "../../../services/productsService";
-import { useQuery } from "@tanstack/react-query";
+import { addProductToCart, getProductById } from "../../../services/productsService";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import Cookies from "js-cookie";
+
 
 type Props = {
   addToCart: (productId: string) => void
@@ -18,6 +20,18 @@ export default function ShowProduct({ addToCart }: Props) {
     queryFn: () => getProductById(id),
   });
 
+  const queryClient = useQueryClient();
+
+  const cart = (product: string[]) => {
+    const userValue = Cookies.get("user");
+
+    if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
+
+    const user = JSON.parse(userValue) as string;
+    addProductToCart(user, product);
+    queryClient.refetchQueries(["user"]);
+    return;
+  };
 
   return (
     <>
@@ -40,6 +54,7 @@ export default function ShowProduct({ addToCart }: Props) {
               image={product?.images[0]}
               price={111}
               info={product?.description}
+              cart={() => cart(product.product)}
             />
           )}
         </div>

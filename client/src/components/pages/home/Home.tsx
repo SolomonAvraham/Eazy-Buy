@@ -73,7 +73,7 @@ export default function Home() {
                     onClick={() => ShowProductById(product.product.id)}
                     title={product.product.name}
                     image={product.product.images[0]}
-                    price={111}
+                    price={product.unit_amount / 1}
                     info={product.product.description}
                     key={index}
                   />

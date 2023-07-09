@@ -4,13 +4,13 @@ import {
   getStripeProducts,
   putStripePurchase,
   updateUserCart,
-  getStripeProductById
+  getStripeProductById,
 } from "../controllers/payment.js";
 
 const router = express.Router();
 
 router.get("/products", getStripeProducts);
-router.post("/create-checkout-session",putStripePurchase);
+router.post("/checkout", putStripePurchase);
 router.post("/update", updateUserCart);
 router.delete("/delete", deleteUserCart);
 router.post("/create-checkout-session", putStripePurchase);

@@ -1,11 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../../../services/productsService";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  addProductToCart,
+  getProducts,
+} from "../../../services/productsService";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import Card from "../../features/card/Card";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function Products() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery(["products"], getProducts);
 
@@ -14,6 +19,17 @@ export default function Products() {
       navigate(`/product/${id}`);
       return;
     }
+  };
+
+  const cart = (product: string[]) => {
+    const userValue = Cookies.get("user");
+
+    if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
+
+    const user = JSON.parse(userValue) as string;
+    addProductToCart(user, product);
+    queryClient.refetchQueries(["user"]);
+    return;
   };
 
   return (
@@ -31,14 +47,15 @@ export default function Products() {
       )}
       <div className="grid-row-5 grid  grid-cols-3 gap-10  p-10   ">
         {data &&
-          data.map((product, index) => {
+          data.map((product, index: number) => {
             if (product) {
               return (
                 <Card
                   onClick={() => ShowProductById(product.product.id)}
+                  cart={() => cart(product)}
                   title={product.product.name}
                   image={product.product.images[0]}
-                  price={111}
+                  price={product.unit_amount}
                   info={product.product.description}
                   key={index}
                 />
