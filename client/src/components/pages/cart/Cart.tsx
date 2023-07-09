@@ -40,6 +40,7 @@ const CartComponent = () => {
     if (selectedId !== "") {
       const userValue = Cookies.get("user") as string;
       const userId: string = JSON.parse(userValue);
+console.log(selectedId);
 
       const productId: string = selectedId;
       deleteFromCart.mutateAsync({ userId, productId });
