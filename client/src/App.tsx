@@ -13,6 +13,7 @@ import Success from "./components/features/success/success";
 import Contact from "./components/pages/contact/Contact";
 import CartComponent from "./components/pages/cart/Cart"
 import ShowProduct from "./components/pages/showProuduct/ShowProduct";
+import NotFound from "./components/features/notFound";
 
 
 
@@ -21,6 +22,7 @@ function App() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <Routes>
+        <Route element={<NotFound />} path="*" />
         <Route element={<About />} path="/about" />
         <Route element={<Contact />} path="/contact" />
         <Route element={<Cancel />} path="/cancel" />
