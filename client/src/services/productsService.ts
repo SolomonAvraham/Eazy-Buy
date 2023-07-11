@@ -35,11 +35,11 @@ export const getProductById = async (id: string) => {
   }
 };
 
-export const addProductToCart = async (userId: string, product: string[]) => {
+export const addProductToCart = async (user: string[]) => {
   try {
     const response = await fetch(`http://localhost:5001/api/stripe/update`, {
       method: "POST",
-      body: JSON.stringify({ userId, product }),
+      body: JSON.stringify({ user }),
       headers: {
         "Content-Type": "application/json",
       },

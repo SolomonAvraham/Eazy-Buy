@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   addProductToCart,
   getProducts,
@@ -14,6 +14,15 @@ export default function Products() {
 
   const { data, isLoading, isError } = useQuery(["products"], getProducts);
 
+  const addToCart = useMutation(addProductToCart, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["user"]);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
   const ShowProductById = (id: string) => {
     if (id) {
       navigate(`/product/${id}`);
@@ -26,10 +35,9 @@ export default function Products() {
 
     if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
 
-    const user = JSON.parse(userValue) as string;
-    addProductToCart(user, product);
-    queryClient.refetchQueries(["user"]);
-    return;
+    const user: string = JSON.parse(userValue);
+
+    return addToCart.mutate({ userId: user, product: product });
   };
 
   return (
