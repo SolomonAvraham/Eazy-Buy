@@ -27,8 +27,8 @@ const MyCancelCompo = () => {
 const Cancel = () => {
   return (
     <>
-    <MyCancelCompo />
-    {console.log('cancel')}
+      <MyCancelCompo />
+      {console.log('cancel')}
     </>
   )
 

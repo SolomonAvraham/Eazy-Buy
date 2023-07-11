@@ -71,11 +71,10 @@ const Header = () => {
         <div className="flex justify-evenly gap-4 text-4xl md:gap-2 md:text-4xl">
           <div
             onClick={() => navigate("/cart")}
-            className={`${
-              !userObj.user?.cart
+            className={`${!userObj.user?.cart
                 ? " cursor-pointer text-white  hover:text-slate-300"
                 : " cursor-pointer text-amber-300  hover:text-amber-200"
-            } `}
+              } `}
           >
             {cart && (
               <div className=" absolute right-4 top-6 h-5 w-5 rounded-2xl bg-black outline-dotted outline-1 outline-white">
@@ -89,11 +88,10 @@ const Header = () => {
           <div className="flex gap-2 ">
             <span
               onClick={() => setIsOpen((isOpen: IsOpenState) => !isOpen)}
-              className={`${
-                !userObj.user?.fullName
+              className={`${!userObj.user?.fullName
                   ? " cursor-pointer text-white  hover:text-slate-300"
                   : " cursor-pointer text-amber-300  hover:text-amber-200"
-              } `}
+                } `}
             >
               <FaUserCircle />
             </span>
@@ -179,13 +177,13 @@ const Header = () => {
                   onClick={
                     item.onclick
                       ? () => {
-                          item.onclick();
-                          setIsOpen(false);
-                        }
+                        item.onclick();
+                        setIsOpen(false);
+                      }
                       : () => {
-                          navigate(item.route);
-                          setIsOpen(false);
-                        }
+                        navigate(item.route);
+                        setIsOpen(false);
+                      }
                   }
                   className=" mt-5 cursor-pointer text-4xl font-bold hover:text-slate-600 md:text-xl"
                 >
@@ -205,10 +203,9 @@ const Header = () => {
           <div
             key={element.name}
             onClick={() => navigate(`/${element.route}`)}
-            className={`${
-              lastPath === element.route &&
+            className={`${lastPath === element.route &&
               " bg-slate-600 hover:text-slate-400 "
-            } cursor-pointer rounded-b-2xl bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
+              } cursor-pointer rounded-b-2xl bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
           >
             {element.name}
           </div>
