@@ -59,17 +59,23 @@ export const getStripeProductById = async (request, response) => {
 
 export const updateUserCart = async (request, response) => {
   try {
-    const { userId, product } = request.body;
-    console.log(userId, product);
-    const user = await User.findById(userId);
-    if (!user) {
+    const { user } = request.body;
+
+    const userExist = await User.findById(user.userId);
+    if (!userExist) {
       return response.status(404).json({ error: "User not found" });
     }
-    user.cart.push(product);
-    await user.save();
+
+    if (!user.product) {
+      return response.status(404).json({ error: "Product not found" });
+    }
+
+    userExist.cart.push(user.product);
+    await userExist.save();
+
     response.json({ message: "User cart updated successfully" });
   } catch (error) {
-    response.status(500).json({ error: "Internal server error" });
+    response.status(500).json({ error: error.message });
   }
 };
 
@@ -105,6 +111,6 @@ export const deleteUserCart = async (request, response) => {
       message: "Product removed from cart successfully",
     });
   } catch (error) {
-    response.status(500).json({ error: "Internal server error" });
+    response.status(500).json({ error: error.message });
   }
 };
