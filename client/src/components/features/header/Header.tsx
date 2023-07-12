@@ -82,7 +82,7 @@ const Header = () => {
               !userObj.user?.cart
                 ? " cursor-pointer text-white  hover:text-slate-300"
                 : " cursor-pointer text-amber-300  hover:text-amber-200"
-            } `}
+              } `}
           >
             {cart && (
               <div
@@ -102,11 +102,10 @@ const Header = () => {
           <div className="flex gap-2 ">
             <span
               onClick={() => setIsOpen((isOpen: IsOpenState) => !isOpen)}
-              className={`${
-                !userObj.user?.fullName
+              className={`${!userObj.user?.fullName
                   ? " cursor-pointer text-white  hover:text-slate-300"
                   : " cursor-pointer text-amber-300  hover:text-amber-200"
-              } `}
+                } `}
             >
               <FaUserCircle />
             </span>
@@ -192,9 +191,9 @@ const Header = () => {
                   onClick={
                     item.onclick
                       ? () => {
-                          item.onclick();
-                          setIsOpen(false);
-                        }
+                        item.onclick();
+                        setIsOpen(false);
+                      }
                       : () => {
                           navigateToTopPage(item.route);
                           setIsOpen(false);
@@ -217,11 +216,10 @@ const Header = () => {
         ].map((element) => (
           <div
             key={element.name}
-            onClick={() => navigateToTopPage(`/${element.route}`)}
-            className={`${
-              lastPath === element.route &&
+            onClick={() => navigate(`/${element.route}`)}
+            className={`${lastPath === element.route &&
               " bg-slate-600 hover:text-slate-400 "
-            } cursor-pointer rounded-b-2xl bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
+              } cursor-pointer rounded-b-2xl bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
           >
             {element.name}
           </div>
