@@ -8,6 +8,14 @@ import { userSignUp } from "../../../services/userService";
 export default function SignUp() {
   const navigate = useNavigate();
 
+  const navigateToTopPage = (path: string) => {
+    navigate(path);
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const validationSchema = z.object({
     fullName: z.string().min(4, "שם המכיל לפחות 4 תווים").nonempty("שם מלא"),
     email: z.string().email("אימייל לא תקין").nonempty("אימייל חסר"),
@@ -64,7 +72,7 @@ export default function SignUp() {
     );
 
   if (signUpMutation.isSuccess) {
-    return navigate("/login");
+    return navigateToTopPage("/login");
   }
 
   return (

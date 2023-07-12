@@ -61,3 +61,33 @@ export const getUserById = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+export const removeAndAddFromCart = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const userCart = user.cart;
+
+    if (!userCart[0]) {
+      return res.status(404).send({ message: "Cart is empty" });
+    }
+
+    const lastPurchased = user.productsPurchased;
+
+    lastPurchased.push(...userCart);
+
+    userCart.splice(0, userCart.length);
+
+    await user.save();
+
+    return res.send({
+      message: "Remove from cart and added to last purchased",
+    });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+};

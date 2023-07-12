@@ -23,7 +23,14 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<IsOpenState>(false);
 
   const navigate = useNavigate();
-
+ const navigateToTopPage = (path: string) => {
+   navigate(path);
+   return window.scrollTo({
+     top: 0,
+     behavior: "smooth",
+   });
+ };
+  
   const queryClient = useQueryClient();
 
   const userLogin = async () => {
@@ -70,7 +77,7 @@ const Header = () => {
       <nav className=" flex items-center justify-between px-7 py-2">
         <div className="flex justify-evenly gap-4 text-4xl md:gap-2 md:text-4xl">
           <div
-            onClick={() => navigate("/cart")}
+            onClick={() => navigateToTopPage("/cart")}
             className={`${
               !userObj.user?.cart
                 ? " cursor-pointer text-white  hover:text-slate-300"
@@ -78,7 +85,13 @@ const Header = () => {
             } `}
           >
             {cart && (
-              <div className=" absolute right-4 top-6 h-5 w-5 rounded-2xl bg-black outline-dotted outline-1 outline-white">
+              <div
+                className={` ${
+                  cart.length
+                    ? " absolute   right-4 top-6 h-5 w-5 animate-bounce rounded-2xl bg-black outline-dotted outline-1 outline-white"
+                    : " absolute right-4 top-6 h-5 w-5 rounded-2xl bg-black outline-dotted outline-1 outline-white"
+                }`}
+              >
                 <div className=" text-center text-sm font-thin text-white ">
                   {cart.length}
                 </div>
@@ -109,13 +122,13 @@ const Header = () => {
 
         <div className=" flex items-center  gap-2 ">
           <h3
-            onClick={() => navigate("/")}
+            onClick={() => navigateToTopPage("/")}
             className="cursor-pointer text-white hover:text-slate-300 sm:hidden md:block"
           >
             Eazy-Buy
           </h3>
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigateToTopPage("/")}
             className=" w-12 cursor-pointer rounded-3xl bg-white p-2 drop-shadow-2xl hover:bg-slate-400"
             src="/icons/icon.png"
             alt="logo"
@@ -142,7 +155,7 @@ const Header = () => {
                       <div
                         key={item.name}
                         onClick={() => {
-                          navigate(item.route);
+                          navigateToTopPage(item.route);
                           setIsOpen(false);
                         }}
                         className=" cursor-pointer text-xl font-bold hover:text-slate-600"
@@ -183,7 +196,7 @@ const Header = () => {
                           setIsOpen(false);
                         }
                       : () => {
-                          navigate(item.route);
+                          navigateToTopPage(item.route);
                           setIsOpen(false);
                         }
                   }
@@ -204,7 +217,7 @@ const Header = () => {
         ].map((element) => (
           <div
             key={element.name}
-            onClick={() => navigate(`/${element.route}`)}
+            onClick={() => navigateToTopPage(`/${element.route}`)}
             className={`${
               lastPath === element.route &&
               " bg-slate-600 hover:text-slate-400 "

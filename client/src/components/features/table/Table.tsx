@@ -33,7 +33,7 @@ const TableRow: React.FC<TableRowProps> = ({
       <td>{product.name}</td>
       <td className=" w-1/3 p-1 text-center">{product.description}</td>
       <td>{quantity}</td>
-      <td> ₪ {price / 100}</td>
+      <td> ₪ {price.toLocaleString()}</td>
       <td>
         <button
           onClick={() => onRemove(product.id)}
@@ -72,7 +72,7 @@ const Table: React.FC<{
             quantity={0}
             no={index + 1}
             onRemove={() => onRemove(item.product.id)}
-            price={item.unit_amount}
+            price={item.unit_amount /100}
           />
         ))}
       </tbody>

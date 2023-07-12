@@ -42,7 +42,10 @@ const Card: React.FC<CardProps> = ({
         >
           {info}
         </p>
-        <p className="mb-2 text-center text-gray-900 "> ₪ {price /100}</p>
+        <p className="mb-2 text-center text-gray-900 ">
+          {" "}
+          ₪ {price.toLocaleString()}
+        </p>
         {/* <div className="  flex items-center justify-center gap-5">
           <div
       
@@ -69,7 +72,6 @@ const Card: React.FC<CardProps> = ({
         >
           הוסף לעגלה
         </button>
- 
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema(
     },
     address: String,
     cart: [{ type: Object }],
+    productsPurchased: [{ type: Object }],
   },
   { timestamps: true }
 );
