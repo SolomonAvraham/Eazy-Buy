@@ -63,6 +63,7 @@ const CartComponent = () => {
   }
 
   const cartPricesAfterDivide = cart?.map((price: number) => {
+    console.log(price,"price")
     return price.unit_amount / 100;
   });
   const totalPrice = cartPricesAfterDivide?.reduce(
