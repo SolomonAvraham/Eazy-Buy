@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon --inspect index.js",
-    "build": "npm run build"
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
