@@ -19,7 +19,7 @@ import NotFound from "./components/features/notFound";
 
 function App() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-slate-200  ">
       <Header />
       <Routes>
         <Route element={<NotFound />} path="*" />

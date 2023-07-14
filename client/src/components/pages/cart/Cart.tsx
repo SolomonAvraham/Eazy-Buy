@@ -7,7 +7,7 @@ import {
 } from "../../../services/productsService";
 import Cookies from "js-cookie";
 import { FaShoppingCart } from "react-icons/fa";
-import {   useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CartComponent = () => {
   const { data, isError, isLoading } = useQuery(["user"]);
@@ -46,7 +46,7 @@ const CartComponent = () => {
       const productId: string = id;
       return deleteFromCart.mutate({ userId, productId });
     } else {
-      alert("תקלה קטנה, אנא נסו שוב.");
+      alert("תקלה , אנא נסו שוב.");
     }
   };
 
@@ -96,12 +96,7 @@ const CartComponent = () => {
                 </div>
               ) : (
                 <>
-                  <Table
-                    data={cart}
-                    onRemove={handleRemove}
-                    isRemoving={deleteFromCart.isLoading ? true : false}
-                    num={0}
-                  />
+                  <Table data={cart} onRemove={handleRemove}  />
                   <div className="mt-16 flex flex-col gap-5  ">
                     <div className=" cursor-default rounded-2xl border border-black border-opacity-25 bg-gray-400 p-3 text-lg font-bold text-white shadow-2xl ">
                       סכום סופי :<span> {totalPrice.toLocaleString()} ₪</span>

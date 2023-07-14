@@ -1,21 +1,86 @@
 import Card from "../../features/card/Card";
-import Button from "../../features/button/Button";
 import Subscribe from "../../features/Subscribe/Subscribe";
-import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../../../services/productsService";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  addProductToCart,
+  getProducts,deleteProductFromCart
+} from "../../../services/productsService";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const { data, isLoading, isError } = useQuery(["products"], getProducts);
   const navigate = useNavigate();
+  const navigateToTopPage = (path: string) => {
+    navigate(path);
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const user = useQuery(["user"]);
+  const queryClient = useQueryClient();
+
+
+  const addToCart = useMutation(addProductToCart, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["user"]);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
+  const cart = (product: string[]) => {
+    const userValue = Cookies.get("user");
+
+    if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
+
+    const user: string = JSON.parse(userValue);
+
+    return addToCart.mutate({ userId: user, product: product });
+  };
+
+
 
   const ShowProductById = (id: string) => {
     if (id) {
-      navigate(`/product/${id}`);
+      navigateToTopPage(`/product/${id}`);
       return;
     }
   };
+
+  const removeBtn = (product: string[]) => {
+    const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
+
+    const productExist = cart?.find((prod) => prod.id === product.id);
+    console.log(productExist);
+
+    if (!productExist) return true;
+    return false;
+  };
+
+  const deleteFromCart = useMutation(deleteProductFromCart, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["user"]);
+    },
+  });
+
+  const handleRemove = (product: string[]) => {
+    const userValue = Cookies.get("user") as string;
+    const userId: string = JSON.parse(userValue);
+    // const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
+
+    if (userId) {
+      const productId: string = product?.product?.id;
+      return deleteFromCart.mutate({ userId, productId });
+    } else {
+      alert("תקלה , אנא נסו שוב.");
+    }
+  };
+
 
   return (
     <div className="flex  flex-col   bg-gray-200 ">
@@ -41,12 +106,12 @@ export default function Home() {
           חיי היומיום שלכם. ממכשירי בית חכם עד גאדג'טים ידידותיים לסביבה, יש לנו
           את כל מה שאתם צריכים כדי לפשט ולחשמל את העולם שלכם.
         </p>
-        <Button
-          onClick={() => navigate("/products")}
-          className="mt-8 cursor-pointer rounded-md px-6 py-2 text-white transition-colors hover:bg-blue-600"
+        <button
+          onClick={() => navigateToTopPage("/products")}
+          className="mt-8 bg-black cursor-pointer rounded-md px-6 py-2 text-white transition-colors hover:bg-blue-600"
         >
           גלו עכשיו
-        </Button>
+        </button>
       </section>
 
       <section className=" min-h-screen ">
@@ -63,18 +128,21 @@ export default function Home() {
             <h1 className=" text-5xl">תקלה, אנא נסה שוב או מאוחר יותר...</h1>
           </div>
         )}
-        <div className=" grid grid-cols-2  gap-10 p-16 pb-10 ">
+        <div className=" grid md:grid-cols-3   gap-5 p-16 pb-10 ">
           {data &&
             data.map((product, index) => {
               if (product && index < 6) {
                 return (
                   <Card
                     onClick={() => ShowProductById(product.product.id)}
+                    cart={() => cart(product)}
                     title={product.product.name}
                     image={product.product.images[0]}
                     price={product.unit_amount / 100}
                     info={product.product.description}
                     key={index}
+                    removeBtn={removeBtn(product)}
+                    removeFromCart={() => handleRemove(product)}
                   />
                 );
               }

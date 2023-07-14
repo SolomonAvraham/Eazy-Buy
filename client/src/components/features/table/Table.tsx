@@ -1,6 +1,5 @@
 type TableRowProps = {
   no: number;
-  quantity: number;
   onRemove: (id: string) => void;
   price: number;
   product: {
@@ -13,9 +12,7 @@ type TableRowProps = {
 
 const TableRow: React.FC<TableRowProps> = ({
   no,
-  quantity,
   onRemove,
-  isRemoving,
   price,
   product,
 }) => {
@@ -31,8 +28,8 @@ const TableRow: React.FC<TableRowProps> = ({
         />
       </td>
       <td>{product.name}</td>
-      <td className=" w-1/3 p-1 text-center">{product.description}</td>
-      <td>{quantity}</td>
+      <td className=" w-1/2  p-1 text-center">{product.description}</td>
+
       <td> ₪ {price.toLocaleString()}</td>
       <td>
         <button
@@ -52,27 +49,25 @@ const Table: React.FC<{
   onRemove: (id: string) => void;
 }> = ({ data, onRemove }) => {
   return (
-    <table className="  table-auto rounded-xl   border border-gray-100 bg-slate-200  shadow-2xl">
-      <thead className="h-14  bg-slate-400 text-xl ">
+    <table className="   table-auto rounded-xl   border border-gray-100 bg-slate-200  shadow-2xl">
+      <thead className="h-14    bg-slate-400 md:text-xl ">
         <tr>
           <th>מס׳</th>
           <th>תמונה</th>
           <th>שם המוצר</th>
           <th>תיאור</th>
-          <th>כמות</th>
           <th>מחיר</th>
           <th>הסר</th>
         </tr>
       </thead>
-      <tbody className=" p-10 [&>*:nth-child(even)]:bg-slate-300 ">
+      <tbody className=" md:p-10 [&>*:nth-child(even)]:bg-slate-300 ">
         {data?.map((item, index) => (
           <TableRow
             key={index}
             product={item.product}
-            quantity={0}
             no={index + 1}
             onRemove={() => onRemove(item.product.id)}
-            price={item.unit_amount /100}
+            price={item.unit_amount / 100}
           />
         ))}
       </tbody>

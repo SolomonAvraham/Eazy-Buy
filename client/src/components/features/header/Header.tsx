@@ -23,14 +23,14 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<IsOpenState>(false);
 
   const navigate = useNavigate();
- const navigateToTopPage = (path: string) => {
-   navigate(path);
-   return window.scrollTo({
-     top: 0,
-     behavior: "smooth",
-   });
- };
-  
+  const navigateToTopPage = (path: string) => {
+    navigate(path);
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const queryClient = useQueryClient();
 
   const userLogin = async () => {
@@ -73,7 +73,7 @@ const Header = () => {
   const lastPath = window.location.href.split("/").pop();
 
   return (
-    <header className="sticky top-0 z-50 bg-black shadow-xl ">
+    <header className="sticky top-0 z-50 rounded-e-full bg-black shadow-xl">
       <nav className=" flex items-center justify-between px-7 py-2">
         <div className="flex justify-evenly gap-4 text-4xl md:gap-2 md:text-4xl">
           <div
@@ -82,7 +82,7 @@ const Header = () => {
               !userObj.user?.cart
                 ? " cursor-pointer text-white  hover:text-slate-300"
                 : " cursor-pointer text-amber-300  hover:text-amber-200"
-              } `}
+            } `}
           >
             {cart && (
               <div
@@ -102,10 +102,11 @@ const Header = () => {
           <div className="flex gap-2 ">
             <span
               onClick={() => setIsOpen((isOpen: IsOpenState) => !isOpen)}
-              className={`${!userObj.user?.fullName
+              className={`${
+                !userObj.user?.fullName
                   ? " cursor-pointer text-white  hover:text-slate-300"
                   : " cursor-pointer text-amber-300  hover:text-amber-200"
-                } `}
+              }   ${isOpen && "scale-125 text-amber-200"}`}
             >
               <FaUserCircle />
             </span>
@@ -122,7 +123,7 @@ const Header = () => {
         <div className=" flex items-center  gap-2 ">
           <h3
             onClick={() => navigateToTopPage("/")}
-            className="cursor-pointer text-white hover:text-slate-300 sm:hidden md:block"
+            className=" font-one  cursor-pointer text-white hover:text-slate-300 sm:hidden md:block"
           >
             Eazy-Buy
           </h3>
@@ -178,7 +179,7 @@ const Header = () => {
         >
           {isOpen && (
             <>
-              <span className="block  cursor-default text-5xl font-bold md:hidden ">
+              <span className="block text-center  cursor-default text-3xl font-bold   md:hidden ">
                 שלום, {userObj.user?.fullName} .
                 <hr className=" mt-2 h-1 bg-black bg-opacity-10" />
               </span>
@@ -191,9 +192,9 @@ const Header = () => {
                   onClick={
                     item.onclick
                       ? () => {
-                        item.onclick();
-                        setIsOpen(false);
-                      }
+                          item.onclick();
+                          setIsOpen(false);
+                        }
                       : () => {
                           navigateToTopPage(item.route);
                           setIsOpen(false);
@@ -216,10 +217,11 @@ const Header = () => {
         ].map((element) => (
           <div
             key={element.name}
-            onClick={() => navigate(`/${element.route}`)}
-            className={`${lastPath === element.route &&
-              " bg-slate-600 hover:text-slate-400 "
-              } cursor-pointer rounded-b-2xl bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
+            onClick={() => navigateToTopPage(`/${element.route}`)}
+            className={`${
+              lastPath === element.route &&
+              " bg-slate-400 hover:text-slate-900 "
+            }  cursor-pointer rounded-b-3xl border-b-2 border-black bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
           >
             {element.name}
           </div>

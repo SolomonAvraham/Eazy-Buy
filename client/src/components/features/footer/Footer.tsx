@@ -1,30 +1,30 @@
 const Footer = () => {
   return (
-    <footer className="bg-wh-900 text-wh-50 py-2 px-10">
-      <div className="justify-between mx-auto gap-1p sm:flex">
-        {/* FIRST COLUMN */}
-        <div className="mt-16 basis-1/2 sm:mt-0">
-          <h4 className="font-bold">EAZY BUY</h4>
-          <p className="my-5">
-            בחנות שלנו תוכלו למצוא מגוון רחב של מוצרים דיגיטליים המתאימים לכל הצרכים. אנו מתמחים במכשירים חשמליים, טכנולוגיה מתקדמת ומוצרי בית חכם המעניקים לכם חווית שימוש מהנה ומתקדמת.
+    <footer className="   h-96 rounded-s-full    bg-black  p-10 shadow-2xl md:h-48">
+      <div className="  grid place-items-center  gap-4 font-semibold md:grid-cols-3 md:justify-items-end">
+        <div className="text-center text-white ">
+          <h4 className=" ">ליצירת קשר</h4>
+          <p className=" ">
+            תוכלו לפנות אלינו דרך המייל EazyBuy@gmail.com, או להתקשר <br />{" "}
+            050-5428743
           </p>
-          <p>© כל הזכויות שמורות</p>
         </div>
-        {/* SECOND COLUMN */}
-        <div className="mt-16 basis-1/4 sm:mt-0">
-          <h4 className="font-bold">קישורים</h4>
-          <p className="my-5">מדיה חברתית</p>
-          <p className="my-5">לערוץ הדיסקורד שלנו</p>
-          <p>הלקוח תמיד צודק</p>
+
+        <div className=" text-center text-white   ">
+          <h6 className=" ">EAZY-BUY</h6>
+          <p className=" ">
+            בחנות שלנו תוכלו למצוא מגוון רחב של מוצרים דיגיטליים המתאימים לכל
+            הצרכים. אנו מתמחים במכשירים חשמליים, טכנולוגיה מתקדמת ומוצרי בית חכם
+            המעניקים לכם חווית שימוש מהנה ומתקדמת.
+          </p>
+          <p className=" "> כל הזכויות שמורות © EAZY BUY </p>
         </div>
-        {/* THIRD COLUMN */}
-        <div className="mt-16 basis-1/4 sm:mt-0">
-          <h4 className="font-bold">ליצירת קשת</h4>
-          <p className="my-5">תוכלו לפנות אלינו דרך המייל או להתקשר</p>
-          <p>(333)425-6825</p>
+
+        <div className="w-1/12  md:w-1/6 cursor-default rounded-full bg-white p-1 md:p-3     ">
+          <img className="   " src="/icons/icon.png" alt="logo" />
         </div>
       </div>
     </footer>
   );
 };
-export default Footer
+export default Footer;

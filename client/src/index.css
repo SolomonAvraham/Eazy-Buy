@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC&family=M+PLUS+1p:wght@500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +6,3 @@
 * {
   direction: rtl;
 }
- 

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   addProductToCart,
+  deleteProductFromCart,
   getProducts,
 } from "../../../services/productsService";
 import ScaleLoader from "react-spinners/ScaleLoader";
@@ -10,9 +11,18 @@ import Cookies from "js-cookie";
 
 export default function Products() {
   const navigate = useNavigate();
+  const navigateToTopPage = (path: string) => {
+    navigate(path);
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery(["products"], getProducts);
+  const user = useQuery(["user"]);
 
   const addToCart = useMutation(addProductToCart, {
     onSuccess: () => {
@@ -25,7 +35,7 @@ export default function Products() {
 
   const ShowProductById = (id: string) => {
     if (id) {
-      navigate(`/product/${id}`);
+      navigateToTopPage(`/product/${id}`);
       return;
     }
   };
@@ -40,9 +50,38 @@ export default function Products() {
     return addToCart.mutate({ userId: user, product: product });
   };
 
+  const removeBtn = (product: string[]) => {
+    const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
+
+    const productExist = cart?.find((prod) => prod.id === product.id);
+    console.log(productExist);
+
+    if (!productExist) return true;
+    return false;
+  };
+
+  const deleteFromCart = useMutation(deleteProductFromCart, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["user"]);
+    },
+  });
+
+  const handleRemove = (product: string[]) => {
+    const userValue = Cookies.get("user") as string;
+    const userId: string = JSON.parse(userValue);
+    // const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
+
+    if (userId) {
+      const productId: string = product?.product?.id;
+      return deleteFromCart.mutate({ userId, productId });
+    } else {
+      alert("תקלה , אנא נסו שוב.");
+    }
+  };
+
   return (
     <div className="flex  flex-col items-center justify-center bg-gray-200 py-10 ">
-      <h1 className=" py-5 text-8xl">מוצרים</h1>
+      <h1 className=" font-three py-5 text-8xl">מוצרים</h1>
       {isLoading && (
         <div className=" flex h-screen items-center justify-center">
           <ScaleLoader color="#657c78" height={30} width={30} />
@@ -53,7 +92,7 @@ export default function Products() {
           <h1 className=" text-5xl">תקלה, אנא נסה שוב או מאוחר יותר...</h1>
         </div>
       )}
-      <div className="grid-row-5 grid  grid-cols-3 gap-10  p-10   ">
+      <div className="md:grid-row-5 grid md:grid-cols-3 gap-10  p-10   ">
         {data &&
           data.map((product, index: number) => {
             if (product) {
@@ -61,11 +100,13 @@ export default function Products() {
                 <Card
                   onClick={() => ShowProductById(product.product.id)}
                   cart={() => cart(product)}
+                  removeFromCart={() => handleRemove(product)}
                   title={product.product.name}
                   image={product.product.images[0]}
-                  price={product.unit_amount}
+                  price={product.unit_amount / 100}
                   info={product.product.description}
                   key={index}
+                  removeBtn={removeBtn(product)}
                 />
               );
             }

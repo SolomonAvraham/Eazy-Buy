@@ -20,6 +20,11 @@ export default {
         lg: "1024px",
         xl: "1280px",
       },
+      fontFamily: {
+        one: " 'Acme' ,sans-'serif'",
+        two: " 'M PLUS 1p',sans-serif  ",
+        three: " 'Amatic SC', sans-serif",
+      },
     },
   },
   plugins: [],

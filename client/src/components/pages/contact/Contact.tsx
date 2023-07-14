@@ -63,66 +63,62 @@ const Contact: React.FC = () => {
   ];
   return (
     <>
-      <div className="  bg-gray-200  p-10  ">
-        <div className=" flex items-center  justify-center h-screen p-16 mt-24 mb-24">
-          <div className="  flex flex-col items-center justify-center bg-slate-200 rounded-2xl shadow-2xl">
-            <h1 className=" text-6xl mt-5">Eazy-Buy</h1>
-            <hr className="bg-gray-500 w-1/3 bg-opacity-10 mt-3 h-1" />
-            <h2 className=" text-xl mt-3 font-bold ">צור קשר</h2>
-            <hr className="bg-gray-500 w-1/6 bg-opacity-10 h-1" />
+      <div className="  min-h-screen bg-slate-200 p-10  ">
+        <div className="  mb-24 mt-24 flex flex-col items-center justify-center rounded-2xl bg-slate-200 shadow-2xl">
+          <h1 className=" mt-5 text-6xl">Eazy-Buy</h1>
+          <hr className="mt-3 h-1 w-1/3 bg-gray-500 bg-opacity-10" />
+          <h2 className=" mt-3 text-xl font-bold ">צור קשר</h2>
+          <hr className="h-1 w-1/6 bg-gray-500 bg-opacity-10" />
 
-            <p className=" text-center tracking-wider font-bold p-10">
-              שמחים שביקרתם באתר "איזי-ביי"! אנחנו ממש רוצים לשמוע מכם ולעזור
-              בכל שאלה או בעיה שיש לכם. להלן פרטי התקשורת שלנו: כתובת: 123 רחוב
-              הקניון, תל אביב, ישראל טלפון: +972-123-456789 דוא"ל:
-              info@eazy-buy.com נשמח לספק לכם מענה מהיר ואדיב לכל שאלה, בקשה או
-              בעיה שתצטרכו עזרה בה. אנו זמינים בימים ראשון עד חמישי בין השעות
-              9:00 ל-17:00. בנוסף, אם יש לכם הצעות, ביקורות או משוב שתרצו לשתף
-              איתנו, אנחנו תמיד פתוחים לשמוע. אנו ערים להערותיכם ומשובכם ונשתדל
-              לשפר ולהתפתח כפי שאתם צריכים. אתם יכולים גם ליצור איתנו קשר
-              באמצעות הטופס הבא:
-            </p>
-            <Formik
-              initialValues={initialValues}
-              onSubmit={handleSubmit}
-              validate={validateForm}
-            >
-              <Form className=" flex flex-col gap-5 items-center">
-                <div className=" flex flex-col text-center placeholder:text-center  gap-3 font-bold rounded-2xl  ">
-                  {formField.map((elements, index) => (
-                    <div key={elements.name + 1}>
-                      <label key={index} htmlFor={elements.name}>
-                        {elements.name}
-                      </label>
-                      <ErrorMessage
-                        key={elements.type}
-                        name={elements.type}
-                        component="div"
-                        className="error-message text-red-600"
-                      />
-                      <Field
-                        key={elements.name}
-                        type={elements.type}
-                        id={elements.type}
-                        name={elements.type}
-                        placeholder={elements.placeholder}
-                        rows={elements.rows}
-                        as={elements.as}
-                      />
-                    </div>
-                  ))}
+          <p className=" p-10 text-center font-bold tracking-wider">
+            שמחים שביקרתם באתר "איזי-ביי"! אנחנו ממש רוצים לשמוע מכם ולעזור בכל
+            שאלה או בעיה שיש לכם. להלן פרטי התקשורת שלנו: כתובת: 123 רחוב
+            הקניון, תל אביב, ישראל טלפון: +972-123-456789 דוא"ל:
+            info@eazy-buy.com נשמח לספק לכם מענה מהיר ואדיב לכל שאלה, בקשה או
+            בעיה שתצטרכו עזרה בה. אנו זמינים בימים ראשון עד חמישי בין השעות 9:00
+            ל-17:00. בנוסף, אם יש לכם הצעות, ביקורות או משוב שתרצו לשתף איתנו,
+            אנחנו תמיד פתוחים לשמוע. אנו ערים להערותיכם ומשובכם ונשתדל לשפר
+            ולהתפתח כפי שאתם צריכים. אתם יכולים גם ליצור איתנו קשר באמצעות הטופס
+            הבא:
+          </p>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            validate={validateForm}
+          >
+            <Form className=" grid place-items-baseline  py-5 text-center font-semibold placeholder:text-center">
+              {formField.map((elements, index) => (
+                <div key={elements.name + 1}>
+                  <label key={index} htmlFor={elements.name}>
+                    {elements.name}
+                  </label>
+                  <ErrorMessage
+                    key={elements.type}
+                    name={elements.type}
+                    component="div"
+                    className="error-message text-red-600"
+                  />
+                  <Field
+                    key={elements.name}
+                    type={elements.type}
+                    id={elements.type}
+                    name={elements.type}
+                    placeholder={elements.placeholder}
+                    rows={elements.rows}
+                    as={elements.as}
+                  />
                 </div>
+              ))}
 
-                <button
-                  className=" text-white rounded-xl hover:bg-gray-500 bg-gray-600 py-5 px-10"
-                  type="submit"
-                >
-                  שלח
-                </button>
-              </Form>
-            </Formik>
-            <img src="/icons/icon.png" alt="icon" className="  mt-10 mb-5 " />
-          </div>
+              <button
+                className=" mx-auto mt-10 rounded-xl bg-gray-600 px-10 py-5 text-white hover:bg-gray-500"
+                type="submit"
+              >
+                שלח
+              </button>
+            </Form>
+          </Formik>
+          <img src="/icons/icon.png" alt="icon" className="  mb-5 mt-10 " />
         </div>
       </div>
     </>
