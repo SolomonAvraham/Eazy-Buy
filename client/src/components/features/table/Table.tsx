@@ -67,7 +67,7 @@ const Table: React.FC<{
             product={item.product}
             no={index + 1}
             onRemove={() => onRemove(item.product.id)}
-            price={item.unit_amount / 100}
+            price={item.unit_amount / 100 | 150}
           />
         ))}
       </tbody>
