@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   const removeBtn = (product: string[]) => {
-    const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
+    const cart = user.data?.user.cart[0] ? user.data?.user.cart : null; //Property 'user' does not exist on type '{}'.ts(2339)
 
     const productExist = cart?.find((prod) => prod.id === product.id);
     console.log(productExist);

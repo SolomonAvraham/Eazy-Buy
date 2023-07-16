@@ -8,7 +8,7 @@ const Success = () => {
   const [isAnimationActive, setIsAnimationActive] = useState(false);
 
   const userValue = Cookies.get("user");
-  const userId: string = JSON.parse(userValue);
+  const userId: string = JSON.parse(userValue || "");
 
   const queryClient = useQueryClient();
 

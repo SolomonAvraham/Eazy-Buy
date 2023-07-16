@@ -29,10 +29,12 @@ export default function SignUp() {
   const validate = (values: FormValues) => {
     try {
       validationSchema.parse(values);
-    } catch (error) {
-      return error?.formErrors.fieldErrors;
+    } catch (error: unknown) {
+      const typedError = error as z.ZodError; // Define the type of the error object
+      return typedError?.formErrors?.fieldErrors;
     }
   };
+
 
   type FormValues = {
     fullName: string;

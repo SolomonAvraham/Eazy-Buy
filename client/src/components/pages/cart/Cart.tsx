@@ -14,7 +14,7 @@ const CartComponent = () => {
 
   const queryClient = useQueryClient();
 
-  const cart = data?.user.cart[0] ? data?.user.cart : null;
+  const cart = data?.user.cart[0] ? data?.user.cart : null; // 
 
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const CartComponent = () => {
   const purchaseFromCart = useMutation(purchaseProducts);
 
   const purchaseHandler = () => {
-    const products = cart?.map((product) => {
+    const products = cart?.map((product) => { // Parameter 'product' implicitly has an 'any' type.ts(7006)
       return {
         price: product.product.default_price,
         name: product.product.name,

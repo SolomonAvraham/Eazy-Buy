@@ -20,7 +20,7 @@ const Header = () => {
     token: "",
   });
 
-  const [isOpen, setIsOpen] = useState<IsOpenState>(false);
+  const [isOpen, setIsOpen] = useState<IsOpenState>({ isOpen: false });
 
   const navigate = useNavigate();
   const navigateToTopPage = (path: string) => {
@@ -53,7 +53,7 @@ const Header = () => {
 
   const { data } = useQuery(["user"], userLogin);
 
-  const cart = data?.user.cart ?? null;
+  const cart = data?.user?.cart ?? null;
 
   const userSignOut = () => {
     const userValue = Cookies.get("user");
@@ -74,45 +74,45 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 rounded-e-full bg-black shadow-xl">
-      <nav className=" flex items-center justify-between px-7 py-2">
+      <nav className="flex items-center justify-between px-7 py-2">
         <div className="flex justify-evenly gap-4 text-4xl md:gap-2 md:text-4xl">
           <div
             onClick={() => navigateToTopPage("/cart")}
             className={`${
               !userObj.user?.cart
-                ? " cursor-pointer text-white  hover:text-slate-300"
-                : " cursor-pointer text-amber-300  hover:text-amber-200"
-            } `}
+                ? "cursor-pointer text-white hover:text-slate-300"
+                : "cursor-pointer text-amber-300 hover:text-amber-200"
+            }`}
           >
             {cart && (
               <div
-                className={` ${
+                className={`${
                   cart.length
-                    ? " absolute   right-4 top-6 h-5 w-5 animate-bounce rounded-2xl bg-black outline-dotted outline-1 outline-white"
-                    : " absolute right-4 top-6 h-5 w-5 rounded-2xl bg-black outline-dotted outline-1 outline-white"
+                    ? "absolute right-4 top-6 h-5 w-5 animate-bounce rounded-2xl bg-black outline-dotted outline-1 outline-white"
+                    : "absolute right-4 top-6 h-5 w-5 rounded-2xl bg-black outline-dotted outline-1 outline-white"
                 }`}
               >
-                <div className=" text-center text-sm font-thin text-white ">
+                <div className="text-center text-sm font-thin text-white">
                   {cart.length}
                 </div>
               </div>
             )}
             <FaShoppingCart />
           </div>
-          <div className="flex gap-2 ">
+          <div className="flex gap-2">
             <span
-              onClick={() => setIsOpen((isOpen: IsOpenState) => !isOpen)}
+              onClick={() => setIsOpen((prev) => ({ isOpen: !prev.isOpen }))}
               className={`${
                 !userObj.user?.fullName
-                  ? " cursor-pointer text-white  hover:text-slate-300"
-                  : " cursor-pointer text-amber-300  hover:text-amber-200"
-              }   ${isOpen && "scale-125 text-amber-200"}`}
+                  ? "cursor-pointer text-white hover:text-slate-300"
+                  : "cursor-pointer text-amber-300 hover:text-amber-200"
+              } ${isOpen.isOpen && "scale-125 text-amber-200"}`}
             >
               <FaUserCircle />
             </span>
-            <div className=" text-sm text-white md:mt-3">
+            <div className="text-sm text-white md:mt-3">
               {userObj.user && (
-                <span className="hidden  cursor-default font-thin md:block">
+                <span className="hidden cursor-default font-thin md:block">
                   שלום, {userObj.user?.fullName}.
                 </span>
               )}
@@ -120,16 +120,16 @@ const Header = () => {
           </div>
         </div>
 
-        <div className=" flex items-center  gap-2 ">
+        <div className="flex items-center gap-2">
           <h3
             onClick={() => navigateToTopPage("/")}
-            className=" font-one  cursor-pointer text-white hover:text-slate-300 sm:hidden md:block"
+            className="font-one cursor-pointer text-white hover:text-slate-300 sm:hidden md:block"
           >
             Eazy-Buy
           </h3>
           <img
             onClick={() => navigateToTopPage("/")}
-            className=" w-12 cursor-pointer rounded-3xl bg-white p-2 drop-shadow-2xl hover:bg-slate-400"
+            className="w-12 cursor-pointer rounded-3xl bg-white p-2 drop-shadow-2xl hover:bg-slate-400"
             src="/icons/icon.png"
             alt="logo"
           />
@@ -138,27 +138,27 @@ const Header = () => {
       {!userObj.user ? (
         <div
           className={
-            !isOpen
-              ? "   max-h-0"
-              : " top-18 absolute flex h-96  w-full flex-col items-center justify-center gap-5 border-2 border-black  border-opacity-10 bg-slate-300 transition-all delay-75 duration-150 ease-in-out md:right-1 md:h-fit md:w-72 md:rounded-b-2xl md:p-10"
+            !isOpen.isOpen
+              ? "max-h-0"
+              : "top-18 absolute flex h-96 w-full flex-col items-center justify-center gap-5 border-2 border-black border-opacity-10 bg-slate-300 transition-all delay-75 duration-150 ease-in-out md:right-1 md:h-fit md:w-72 md:rounded-b-2xl md:p-10"
           }
         >
-          {isOpen && (
+          {isOpen.isOpen && (
             <>
-              <div className="   text-sm md:mt-3">
+              <div className="text-sm md:mt-3">
                 {!userObj.user && (
-                  <div className="flex flex-col gap-5 p-1 text-2xl tracking-widest  md:mt-1 md:p-0 md:text-xs">
+                  <div className="flex flex-col gap-5 p-1 text-2xl tracking-widest md:mt-1 md:p-0 md:text-xs">
                     {[
-                      { route: "/login", name: " התחבר " },
-                      { route: "/signup", name: " הירשם " },
+                      { route: "/login", name: "התחבר" },
+                      { route: "/signup", name: "הירשם" },
                     ].map((item) => (
                       <div
                         key={item.name}
                         onClick={() => {
                           navigateToTopPage(item.route);
-                          setIsOpen(false);
+                          setIsOpen((prev) => ({ isOpen: false }));
                         }}
-                        className=" cursor-pointer text-xl font-bold hover:text-slate-600"
+                        className="cursor-pointer text-xl font-bold hover:text-slate-600"
                       >
                         {item.name}
                       </div>
@@ -172,20 +172,20 @@ const Header = () => {
       ) : (
         <div
           className={
-            !isOpen
-              ? "   max-h-0"
-              : " top-18 absolute flex h-96  w-full flex-col items-center justify-center gap-5 border-2 border-black  border-opacity-10 bg-slate-300 transition-all delay-75 duration-150 ease-in-out md:right-1 md:h-fit md:w-72 md:rounded-b-2xl md:p-10"
+            !isOpen.isOpen
+              ? "max-h-0"
+              : "top-18 absolute flex h-96 w-full flex-col items-center justify-center gap-5 border-2 border-black border-opacity-10 bg-slate-300 transition-all delay-75 duration-150 ease-in-out md:right-1 md:h-fit md:w-72 md:rounded-b-2xl md:p-10"
           }
         >
-          {isOpen && (
+          {isOpen.isOpen && (
             <>
-              <span className="block text-center  cursor-default text-3xl font-bold   md:hidden ">
-                שלום, {userObj.user?.fullName} .
-                <hr className=" mt-2 h-1 bg-black bg-opacity-10" />
+              <span className="block text-center cursor-default text-3xl font-bold md:hidden">
+                שלום, {userObj.user?.fullName}.
+                <hr className="mt-2 h-1 bg-black bg-opacity-10" />
               </span>
               {[
-                { route: "/userProfile", name: " פרופיל " },
-                { onclick: userSignOut, name: " יציאה " },
+                { route: "/userProfile", name: "פרופיל" },
+                { onclick: userSignOut, name: "יציאה" },
               ].map((item) => (
                 <div
                   key={item.name}
@@ -193,14 +193,14 @@ const Header = () => {
                     item.onclick
                       ? () => {
                           item.onclick();
-                          setIsOpen(false);
+                          setIsOpen((prev) => ({ isOpen: false }));
                         }
                       : () => {
                           navigateToTopPage(item.route);
-                          setIsOpen(false);
+                          setIsOpen((prev) => ({ isOpen: false }));
                         }
                   }
-                  className=" mt-5 cursor-pointer text-4xl font-bold hover:text-slate-600 md:text-xl"
+                  className="mt-5 cursor-pointer text-4xl font-bold hover:text-slate-600 md:text-xl"
                 >
                   {item.name}
                 </div>
@@ -209,7 +209,7 @@ const Header = () => {
           )}
         </div>
       )}
-      <div className="  absolute left-16 right-16 top-16 -z-10 flex justify-center  md:left-28   md:right-28 md:gap-1  ">
+      <div className="absolute left-16 right-16 top-16 -z-10 flex justify-center md:left-28 md:right-28 md:gap-1">
         {[
           { route: "products", name: "מוצרים" },
           { route: "about", name: "קצת עלינו" },
@@ -220,8 +220,8 @@ const Header = () => {
             onClick={() => navigateToTopPage(`/${element.route}`)}
             className={`${
               lastPath === element.route &&
-              " bg-slate-400 hover:text-slate-900 "
-            }  cursor-pointer rounded-b-3xl border-b-2 border-black bg-black px-3 py-3  text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
+              "bg-slate-400 hover:text-slate-900"
+            } cursor-pointer rounded-b-3xl border-b-2 border-black bg-black px-3 py-3 text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
           >
             {element.name}
           </div>
