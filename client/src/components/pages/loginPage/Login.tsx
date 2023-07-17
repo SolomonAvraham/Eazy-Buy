@@ -93,7 +93,7 @@ export default function Login() {
         <p className=" text-2xl font-semibold ">Eazy Buy</p>
         {loginMutation.isError && (
           <div className=" text-xl font-bold text-red-600">
-            {loginMutation.error && loginMutation.error?.message}
+            {loginMutation.error && loginMutation.error?.message || ""}
           </div>
         )}
         {formFields.map((formField, index: number) => (

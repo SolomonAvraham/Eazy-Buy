@@ -28,7 +28,7 @@ export default function ShowProduct({ addToCart }: Props) {
     if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
 
     const user = JSON.parse(userValue) as string;
-    addProductToCart(user, product);
+    addProductToCart(user , product);
     queryClient.refetchQueries(["user"]);
     return;
   };
@@ -49,7 +49,6 @@ export default function ShowProduct({ addToCart }: Props) {
         <div className="flex  w-1/3 items-center justify-center">
           {product && (
             <Card
-              onClick={()=>{}}
               title={product?.name}
               image={product?.images[0]}
               price={111}
