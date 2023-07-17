@@ -16,7 +16,11 @@ app.use(morgan("common"));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: "GET, PUT, POST, DELETE, UPDATE",
+  credentials: true
+}));
 
 app.use("/client", clientRoute);
 app.use("/api/stripe", paymentRoute);
