@@ -147,7 +147,7 @@ const Header = () => {
             <>
               <div className="   text-sm md:mt-3">
                 {!userObj.user && (
-                  <div className="flex flex-col gap-5 p-1 text-2xl tracking-widest  md:mt-1 md:p-0 md:text-xs">
+                  <div className="flex flex-col gap-24 p-1 text-2xl tracking-widest  md:mt-1 md:p-0 md:text-xs">
                     {[
                       { route: "/login", name: " התחבר " },
                       { route: "/signup", name: " הירשם " },
@@ -158,7 +158,7 @@ const Header = () => {
                           navigateToTopPage(item.route);
                           setIsOpen(false);
                         }}
-                        className=" cursor-pointer text-xl font-bold hover:text-slate-600"
+                        className=" cursor-pointer text-5xl font-bold hover:text-slate-600"
                       >
                         {item.name}
                       </div>

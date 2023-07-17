@@ -20,6 +20,14 @@ export default function Login() {
   };
 
   const navigate = useNavigate();
+  const navigateToTopPage = (path: string) => {
+    navigate(path);
+    return window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const queryClient = useQueryClient();
 
   const validationSchema = z.object({
@@ -44,7 +52,7 @@ export default function Login() {
       Cookies.set("token", JSON.stringify(data.token));
       queryClient.invalidateQueries(["user"]);
 
-      return navigate("/");
+      return navigateToTopPage("/");
     },
   });
 
@@ -123,7 +131,7 @@ export default function Login() {
         <div className=" font-bold">
           אין לך עוד חשבון?{" "}
           <span
-            onClick={() => navigate("/signup")}
+            onClick={() => navigateToTopPage("/signup")}
             className=" cursor-pointer text-sky-700 hover:text-sky-500"
           >
             הירשם!
