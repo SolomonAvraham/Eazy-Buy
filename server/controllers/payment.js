@@ -34,8 +34,12 @@ export const putStripePurchase = async (request, response) => {
       })),
       currency: "ILS",
       mode: "payment",
-      success_url: "http://127.0.0.1:5173/success",
-      cancel_url: "http://127.0.0.1:5173/cancel",
+      success_url:
+        "http://127.0.0.1:5173/success" ||
+        "https://eazy-ecommerce-dawitlior.vercel.app/success",
+      cancel_url:
+        "http://127.0.0.1:5173/cancel" ||
+        "https://eazy-ecommerce-dawitlior.vercel.app/",
     });
 
     return response.status(200).json({ redirectUrl: session.url });
