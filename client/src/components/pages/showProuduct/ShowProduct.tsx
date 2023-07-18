@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
 import Card from "../../features/card/Card";
-import { addProductToCart, getProductById } from "../../../services/productsService";
+import {
+  addProductToCart,
+  getProductById
+} from "../../../services/productsService";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import Cookies from "js-cookie";
@@ -25,7 +28,7 @@ export default function ShowProduct( ) {
     if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
 
     const user = JSON.parse(userValue) as string;
-    // addProductToCart({user , product});
+    addProductToCart({user , product});
     queryClient.refetchQueries(["user"]);
     return;
   };

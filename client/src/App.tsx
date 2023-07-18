@@ -7,7 +7,7 @@ import Products from "./components/pages/products/Products";
 import UserProfile from "./components/pages/userProfile/UserProfile";
 import Login from "./components/pages/loginPage/Login";
 import SignUp from "./components/pages/signUpPage/SignUp";
-import About from "./components/pages/about/about";
+import About from "./components/pages/about/About";
 import Cancel from "./components/features/cancel/cancel";
 import Success from "./components/features/success/success";
 import Contact from "./components/pages/contact/Contact";

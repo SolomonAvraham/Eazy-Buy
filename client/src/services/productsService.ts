@@ -36,7 +36,8 @@ export const getProductById = async (id: string) => {
 };
 
 type AddToCart = {
-  userId: string | string[];
+  userId?: string | string[];
+  user? : string | string[];
   product: string[];
 };
 

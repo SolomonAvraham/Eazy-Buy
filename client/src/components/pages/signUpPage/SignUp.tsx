@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { useFormik, FormikConfig } from "formik";
+import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { userSignUp } from "../../../services/userService";
 
@@ -43,9 +43,7 @@ export default function SignUp(): JSX.Element {
     [key: string]: string;
   };
 
-  type FormikTouched<FormValues> = {
-    [field in keyof FormValues]?: boolean;
-  };
+ 
 
   type SignUpError = {
     message?: string | undefined;
