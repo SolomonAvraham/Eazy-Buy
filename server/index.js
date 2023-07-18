@@ -16,7 +16,14 @@ app.use(morgan("common"));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://eazy-buy.netlify.app",
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 
 app.use("/client", clientRoute);
 app.use("/api/stripe", paymentRoute);
