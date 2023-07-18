@@ -7,13 +7,13 @@ import Products from "./components/pages/products/Products";
 import UserProfile from "./components/pages/userProfile/UserProfile";
 import Login from "./components/pages/loginPage/Login";
 import SignUp from "./components/pages/signUpPage/SignUp";
-import About from "./components/pages/about/About";
 import Cancel from "./components/features/cancel/cancel";
 import Success from "./components/features/success/success";
 import Contact from "./components/pages/contact/Contact";
 import CartComponent from "./components/pages/cart/Cart"
 import ShowProduct from "./components/pages/showProuduct/ShowProduct";
 import NotFound from "./components/features/notFound";
+import About from "./components/pages/about/About";
 
 
 
