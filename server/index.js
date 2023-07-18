@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://eazy-buy.netlify.app",
+    origin: "*",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
