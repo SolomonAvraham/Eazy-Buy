@@ -10,11 +10,19 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const CartComponent = () => {
-  const { data, isError, isLoading } = useQuery(["user"]);
+  type UserData = {
+    data: string[];
+    user: string[] & {
+      cart?: object | any;
+    }; 
+  };
+
+  const { data, isError, isLoading } = useQuery<UserData>(["user"]);
+ 
 
   const queryClient = useQueryClient();
 
-  const cart = data?.user.cart[0] ? data?.user.cart : null; // 
+  const cart = data?.user.cart[0] ? data.user.cart : null;
 
   const navigate = useNavigate();
 
@@ -26,8 +34,16 @@ const CartComponent = () => {
 
   const purchaseFromCart = useMutation(purchaseProducts);
 
+  type Prod = {
+    product: {
+      default_price: number;
+      name: string;
+      amount: number;
+    };
+  };
+
   const purchaseHandler = () => {
-    const products = cart?.map((product) => { // Parameter 'product' implicitly has an 'any' type.ts(7006)
+    const products = cart?.map((product: Prod) => { 
       return {
         price: product.product.default_price,
         name: product.product.name,
@@ -62,8 +78,11 @@ const CartComponent = () => {
     );
   }
 
-  const cartPricesAfterDivide = cart?.map((price: number) => {
-    console.log(price,"price")
+  type Price = {
+    unit_amount: number;
+  };
+
+  const cartPricesAfterDivide = cart?.map((price: Price) => {
     return price.unit_amount / 100;
   });
   const totalPrice = cartPricesAfterDivide?.reduce(
@@ -97,7 +116,7 @@ const CartComponent = () => {
                 </div>
               ) : (
                 <>
-                  <Table data={cart} onRemove={handleRemove}  />
+                  <Table data={cart} onRemove={handleRemove} />
                   <div className="mt-16 flex flex-col gap-5  ">
                     <div className=" cursor-default rounded-2xl border border-black border-opacity-25 bg-gray-400 p-3 text-lg font-bold text-white shadow-2xl ">
                       סכום סופי :<span> {totalPrice.toLocaleString()} ₪</span>

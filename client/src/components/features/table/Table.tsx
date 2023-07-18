@@ -1,6 +1,7 @@
 type TableRowProps = {
   no: number;
   onRemove: (id: string) => void;
+  unit_amount?: number;
   price: number;
   product: {
     images: string[];
@@ -67,7 +68,7 @@ const Table: React.FC<{
             product={item.product}
             no={index + 1}
             onRemove={() => onRemove(item.product.id)}
-            price={item.unit_amount / 100 || 150} // Property 'unit_amount' does not exist on type 'TableRowProps'
+            price={(item.unit_amount as number) / 100}
           />
         ))}
       </tbody>

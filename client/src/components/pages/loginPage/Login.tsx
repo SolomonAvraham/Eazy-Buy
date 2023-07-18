@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useFormik } from "formik";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import * as z from "zod";
 import { userLogin } from "../../../services/userService";
@@ -46,6 +49,11 @@ export default function Login() {
     }
   };
 
+  type LoginError = {
+    message?: string | undefined;
+  }
+
+
   const loginMutation = useMutation(userLogin, {
     onSuccess: (data) => {
       Cookies.set("user", JSON.stringify(data.user._id));
@@ -53,6 +61,9 @@ export default function Login() {
       queryClient.invalidateQueries(["user"]);
 
       return navigateToTopPage("/");
+    },
+    onError: (data: LoginError) => {
+      loginMutation.error = data
     },
   });
 
@@ -79,7 +90,7 @@ export default function Login() {
       </div>
     );
   }
-
+ 
   return (
     <form onSubmit={formik.handleSubmit} className="   md:py-16  ">
       <div className="  mx-auto flex h-screen flex-col items-center justify-center gap-5 rounded-xl border-2 border-black   border-opacity-10 bg-gray-100 shadow-xl md:h-fit md:w-1/2 md:p-5">
@@ -93,7 +104,7 @@ export default function Login() {
         <p className=" text-2xl font-semibold ">Eazy Buy</p>
         {loginMutation.isError && (
           <div className=" text-xl font-bold text-red-600">
-            {loginMutation.error && loginMutation.error?.message || ""}
+            {loginMutation.error && loginMutation.error.message}
           </div>
         )}
         {formFields.map((formField, index: number) => (

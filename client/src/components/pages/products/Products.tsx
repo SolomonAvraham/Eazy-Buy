@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation, 
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import {
   addProductToCart,
   deleteProductFromCart,
@@ -21,17 +26,30 @@ export default function Products() {
 
   const queryClient = useQueryClient();
 
-  const { data, isLoading, isError } = useQuery(["products"], getProducts);
-  const user = useQuery(["user"]);
+  type Cart = {
+    user: {
+      cart: string[] & {
+        id: string;
+      };
+    };
+  };
 
-  const addToCart = useMutation(addProductToCart, {
-    onSuccess: () => {
-      queryClient.refetchQueries(["user"]);
-    },
-    onError: (err) => {
-      console.log(err);
-    },
-  });
+  const { data, isLoading, isError } = useQuery(["products"], getProducts);
+  const user: UseQueryResult<Cart> = useQuery(["user"]);
+
+  
+
+  const addToCart = useMutation(
+    addProductToCart,
+    {
+      onSuccess: () => {
+        queryClient.refetchQueries(["user"]);
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    }
+  );
 
   const ShowProductById = (id: string) => {
     if (id) {
@@ -40,21 +58,26 @@ export default function Products() {
     }
   };
 
-  const cart = (product: string[]) => {
+  type Product = string[];
+ 
+  const cart = (product: Product) => {
     const userValue = Cookies.get("user");
 
     if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
 
-    const user: string = JSON.parse(userValue);
+    const user:string []= JSON.parse(userValue);
 
     return addToCart.mutate({ userId: user, product: product });
   };
 
-  const removeBtn = (product: string[]) => {
+  type Prod = {
+    id: string;
+  };
+
+  const removeBtn = (product: Prod) => {
     const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
 
-    const productExist = cart?.find((prod) => prod.id === product.id);
-    console.log(productExist);
+    const productExist = cart?.find((prod: any) => prod.id === product.id);
 
     if (!productExist) return true;
     return false;
@@ -66,13 +89,19 @@ export default function Products() {
     },
   });
 
-  const handleRemove = (product: string[]) => {
+  type ProductRemove = {
+    product: {
+      product: string[];
+      id: string;
+    };
+  };
+
+  const handleRemove = (product: ProductRemove) => {
     const userValue = Cookies.get("user") as string;
     const userId: string = JSON.parse(userValue);
-    // const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
 
     if (userId) {
-      const productId: string = product?.product?.id;
+      const productId = product.product.id;
       return deleteFromCart.mutate({ userId, productId });
     } else {
       alert("תקלה , אנא נסו שוב.");
@@ -81,7 +110,7 @@ export default function Products() {
 
   return (
     <div className="flex  flex-col items-center justify-center bg-gray-200 py-10 ">
-      <h1 className=" font-three py-5 text-8xl">מוצרים</h1>
+      <h1 className=" py-5 font-three text-8xl">מוצרים</h1>
       {isLoading && (
         <div className=" flex h-screen items-center justify-center">
           <ScaleLoader color="#657c78" height={30} width={30} />
@@ -92,9 +121,9 @@ export default function Products() {
           <h1 className=" text-5xl">תקלה, אנא נסה שוב או מאוחר יותר...</h1>
         </div>
       )}
-      <div className="md:grid-row-5 grid md:grid-cols-3 gap-10  p-10   ">
+      <div className="md:grid-row-5 grid gap-10 p-10  md:grid-cols-3   ">
         {data &&
-          data.map((product, index: number) => {
+          data.map((product: any, index: number) => {
             if (product) {
               return (
                 <Card

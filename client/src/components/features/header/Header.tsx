@@ -7,7 +7,10 @@ import { getUserById } from "../../../services/userService";
 
 const Header = () => {
   type UserState = {
-    user: string;
+    user: string & {
+      cart?: object;
+      fullName?: string;
+    };
     token: string;
   };
 
@@ -79,7 +82,7 @@ const Header = () => {
           <div
             onClick={() => navigateToTopPage("/cart")}
             className={`${
-              !userObj.user?.cart
+              !userObj.user.cart
                 ? "cursor-pointer text-white hover:text-slate-300"
                 : "cursor-pointer text-amber-300 hover:text-amber-200"
             }`}
@@ -113,7 +116,7 @@ const Header = () => {
             <div className="text-sm text-white md:mt-3">
               {userObj.user && (
                 <span className="hidden cursor-default font-thin md:block">
-                  שלום, {userObj.user?.fullName}.
+                  שלום, {userObj.user.fullName}.
                 </span>
               )}
             </div>
@@ -123,7 +126,7 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <h3
             onClick={() => navigateToTopPage("/")}
-            className="font-one cursor-pointer text-white hover:text-slate-300 sm:hidden md:block"
+            className="cursor-pointer font-one text-white hover:text-slate-300 sm:hidden md:block"
           >
             Eazy-Buy
           </h3>
@@ -156,7 +159,7 @@ const Header = () => {
                         key={item.name}
                         onClick={() => {
                           navigateToTopPage(item.route);
-                          setIsOpen((prev) => ({ isOpen: false }));
+                          setIsOpen(() => ({ isOpen: false }));
                         }}
                         className=" cursor-pointer text-xl font-bold hover:text-slate-600"
                       >
@@ -179,7 +182,7 @@ const Header = () => {
         >
           {isOpen.isOpen && (
             <>
-              <span className="block text-center cursor-default text-3xl font-bold md:hidden">
+              <span className="block cursor-default text-center text-3xl font-bold md:hidden">
                 שלום, {userObj.user?.fullName}.
                 <hr className="mt-2 h-1 bg-black bg-opacity-10" />
               </span>
@@ -193,11 +196,11 @@ const Header = () => {
                     item.onclick
                       ? () => {
                           item.onclick();
-                          setIsOpen((prev) => ({ isOpen: false }));
+                          setIsOpen(() => ({ isOpen: false }));
                         }
                       : () => {
                           navigateToTopPage(item.route);
-                          setIsOpen((prev) => ({ isOpen: false }));
+                          setIsOpen(() => ({ isOpen: false }));
                         }
                   }
                   className="mt-5 cursor-pointer text-4xl font-bold hover:text-slate-600 md:text-xl"
@@ -219,8 +222,7 @@ const Header = () => {
             key={element.name}
             onClick={() => navigateToTopPage(`/${element.route}`)}
             className={`${
-              lastPath === element.route &&
-              "bg-slate-400 hover:text-slate-900"
+              lastPath === element.route && "bg-slate-400 hover:text-slate-900"
             } cursor-pointer rounded-b-3xl border-b-2 border-black bg-black px-3 py-3 text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
           >
             {element.name}

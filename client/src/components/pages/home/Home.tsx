@@ -1,9 +1,15 @@
 import Card from "../../features/card/Card";
 import Subscribe from "../../features/Subscribe/Subscribe";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import {
   addProductToCart,
-  getProducts,deleteProductFromCart
+  getProducts,
+  deleteProductFromCart,
 } from "../../../services/productsService";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useNavigate } from "react-router-dom";
@@ -20,9 +26,16 @@ export default function Home() {
     });
   };
 
-  const user = useQuery(["user"]);
-  const queryClient = useQueryClient();
+  type Cart = {
+    user: {
+      cart: string[] & {
+        id: string;
+      };
+    };
+  };
 
+  const user: UseQueryResult<Cart> = useQuery(["user"]);
+  const queryClient = useQueryClient();
 
   const addToCart = useMutation(addProductToCart, {
     onSuccess: () => {
@@ -43,8 +56,6 @@ export default function Home() {
     return addToCart.mutate({ userId: user, product: product });
   };
 
-
-
   const ShowProductById = (id: string) => {
     if (id) {
       navigateToTopPage(`/product/${id}`);
@@ -52,10 +63,14 @@ export default function Home() {
     }
   };
 
-  const removeBtn = (product: string[]) => {
+  type Prod = {
+    id: string;
+  };
+
+  const removeBtn = (product: Prod) => {
     const cart = user.data?.user.cart[0] ? user.data?.user.cart : null; //Property 'user' does not exist on type '{}'.ts(2339)
 
-    const productExist = cart?.find((prod) => prod.id === product.id);
+    const productExist = cart?.find((prod: any) => prod.id === product.id);
     console.log(productExist);
 
     if (!productExist) return true;
@@ -68,19 +83,23 @@ export default function Home() {
     },
   });
 
-  const handleRemove = (product: string[]) => {
+  type ProductId = {
+    product: string[] & {
+      id: string;
+    };
+  };
+
+  const handleRemove = (product: ProductId) => {
     const userValue = Cookies.get("user") as string;
     const userId: string = JSON.parse(userValue);
-    // const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
 
     if (userId) {
-      const productId: string = product?.product?.id;
+      const productId: ProductId | string = product.product.id;
       return deleteFromCart.mutate({ userId, productId });
     } else {
       alert("תקלה , אנא נסו שוב.");
     }
   };
-
 
   return (
     <div className="flex  flex-col   bg-gray-200 ">
@@ -108,7 +127,7 @@ export default function Home() {
         </p>
         <button
           onClick={() => navigateToTopPage("/products")}
-          className="mt-8 bg-black cursor-pointer rounded-md px-6 py-2 text-white transition-colors hover:bg-blue-600"
+          className="mt-8 cursor-pointer rounded-md bg-black px-6 py-2 text-white transition-colors hover:bg-blue-600"
         >
           גלו עכשיו
         </button>
@@ -128,9 +147,9 @@ export default function Home() {
             <h1 className=" text-5xl">תקלה, אנא נסה שוב או מאוחר יותר...</h1>
           </div>
         )}
-        <div className=" grid md:grid-cols-3   gap-5 p-16 pb-10 ">
+        <div className=" grid gap-5   p-16 pb-10 md:grid-cols-3 ">
           {data &&
-            data.map((product, index) => {
+            data.map((product: any, index: number) => {
               if (product && index < 6) {
                 return (
                   <Card

@@ -1,11 +1,11 @@
 import * as z from "zod";
 import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { useFormik } from "formik";
+import { useFormik, FormikConfig } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { userSignUp } from "../../../services/userService";
 
-export default function SignUp() {
+export default function SignUp(): JSX.Element {
   const navigate = useNavigate();
 
   const navigateToTopPage = (path: string) => {
@@ -30,22 +30,37 @@ export default function SignUp() {
     try {
       validationSchema.parse(values);
     } catch (error: unknown) {
-      const typedError = error as z.ZodError; // Define the type of the error object
+      const typedError = error as z.ZodError;
       return typedError?.formErrors?.fieldErrors;
     }
   };
-
 
   type FormValues = {
     fullName: string;
     email: string;
     password: string;
     address: string;
+    [key: string]: string;
   };
 
-  const signUpMutation = useMutation(userSignUp);
+  type FormikTouched<FormValues> = {
+    [field in keyof FormValues]?: boolean;
+  };
 
-  const formik = useFormik({
+  type SignUpError = {
+    message?: string | undefined;
+  };
+
+  const signUpMutation = useMutation(userSignUp, {
+    onSuccess: () => {
+      return navigateToTopPage("/login");
+    },
+    onError: (date: SignUpError) => {
+      signUpMutation.error = date;
+    },
+  });
+
+  const formik = useFormik<FormValues>({
     initialValues: {
       fullName: "",
       email: "",
@@ -66,16 +81,18 @@ export default function SignUp() {
     { label: "כתובת", name: "address", type: "text" },
   ];
 
+  type FormFields = {
+    label: string;
+    name: string;
+    type: string;
+  };
+
   if (signUpMutation.isLoading)
     return (
-      <div className=" h-screen flex justify-center items-center">
+      <div className=" flex h-screen items-center justify-center">
         <ScaleLoader color="#657c78" height={30} width={30} />
       </div>
     );
-
-  if (signUpMutation.isSuccess) {
-    return navigateToTopPage("/login");
-  }
 
   return (
     <form
@@ -93,13 +110,13 @@ export default function SignUp() {
         <p className=" text-3xl font-semibold ">Eazy Buy</p>
         {signUpMutation.isError && (
           <div className=" text-xl font-bold text-red-600">
-            {signUpMutation.error?.message}
+            {signUpMutation.error.message}
           </div>
         )}
         {signUpMutation.isSuccess && (
           <h2 className=" text-xl font-bold">נרשמת בהצלחה !</h2>
         )}
-        {formFields.map((formField, index) => (
+        {formFields.map((formField: FormFields, index: number) => (
           <div
             key={formField.label}
             className=" flex flex-col items-center justify-center gap-2"
@@ -112,9 +129,7 @@ export default function SignUp() {
               {formField.label}
             </label>
             {formik.touched[formField.name] && formik.errors[formField.name] ? (
-              <div key={formik.touched[formField.name]}>
-                {formik.errors[formField.name]}
-              </div>
+              <div key={index + 5}>{formik.errors[formField.name]}</div>
             ) : null}
             <input
               key={index}

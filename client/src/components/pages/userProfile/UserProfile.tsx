@@ -1,4 +1,9 @@
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import {
+  useQuery,
+  useQueryClient,
+  useMutation,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { getUserById } from "../../../services/userService";
 import Cookies from "js-cookie";
 import ScaleLoader from "react-spinners/ScaleLoader";
@@ -60,17 +65,31 @@ export default function UserProfile() {
 
   const { data, isLoading, error } = useQuery(["getUserById"], getUser);
   const queryClient = useQueryClient();
-  const user = useQuery(["user"]);
+
+  type Cart = {
+    user: {
+      cart: string[] & {
+        id: string;
+      };
+    };
+  };
+
+  const user: UseQueryResult<Cart> = useQuery(["user"]);
 
   const cart = data?.cart[0] ? data.cart : null;
+
   const lastPurchased = data?.productsPurchased[0]
     ? data.productsPurchased
     : null;
 
-  const removeBtn = (product: string[]) => {
-    const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
+  type Prod = {
+    id: string;
+  };
 
-    const productExist = cart?.find((prod) => prod.id === product.id);
+  const removeBtn = (product: Prod) => {
+    const cart = user.data?.user.cart[0] ? user.data.user.cart : null;
+
+    const productExist = cart?.find((prod: any) => prod.id === product.id);
 
     if (!productExist) return true;
     return false;
@@ -83,13 +102,18 @@ export default function UserProfile() {
     },
   });
 
-  const handleRemove = (product: string[]) => {
-    const userValue = Cookies.get("user") as string;
+  type ProdRemover = {
+    product: {
+      id: string;
+    };
+  };
+
+  const handleRemove = (product: ProdRemover) => {
+    const userValue: string = Cookies.get("user") as string;
     const userId: string = JSON.parse(userValue);
-    // const cart = user.data?.user.cart[0] ? user.data?.user.cart : null;
 
     if (userId) {
-      const productId: string = product?.product?.id;
+      const productId: string = product.product.id;
       return deleteFromCart.mutate({ userId, productId });
     } else {
       alert("תקלה , אנא נסו שוב.");

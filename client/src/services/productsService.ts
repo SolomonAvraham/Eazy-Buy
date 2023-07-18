@@ -35,7 +35,12 @@ export const getProductById = async (id: string) => {
   }
 };
 
-export const addProductToCart = async (user: string[]) => {
+type AddToCart = {
+  userId: string | string[];
+  product: string[];
+};
+
+export const addProductToCart = async (user: AddToCart) => {
   try {
     const response = await fetch(`http://localhost:5001/api/stripe/update`, {
       method: "POST",

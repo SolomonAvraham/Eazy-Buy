@@ -5,19 +5,16 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import Cookies from "js-cookie";
 
+ 
 
-type Props = {
-  addToCart: (productId: string) => void
-}
-
-export default function ShowProduct({ addToCart }: Props) {
+export default function ShowProduct( ) {
   const { id } = useParams<string>();
   const {
     data: product,
     isLoading,
     isError,
   } = useQuery(["productById"], {
-    queryFn: () => getProductById(id),
+    queryFn: () => getProductById(id as string),
   });
 
   const queryClient = useQueryClient();
@@ -28,7 +25,7 @@ export default function ShowProduct({ addToCart }: Props) {
     if (!userValue) return alert("חייב להירשם לאתר כדי להוסיף מוצרים לעגלה.");
 
     const user = JSON.parse(userValue) as string;
-    addProductToCart(user , product);
+    // addProductToCart({user , product});
     queryClient.refetchQueries(["user"]);
     return;
   };
@@ -54,6 +51,9 @@ export default function ShowProduct({ addToCart }: Props) {
               price={111}
               info={product?.description}
               cart={() => cart(product.product)}
+              removeBtn={true}
+              removeAddBtn={true}
+ 
             />
           )}
         </div>
