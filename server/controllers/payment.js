@@ -36,10 +36,10 @@ export const putStripePurchase = async (request, response) => {
       mode: "payment",
       success_url:
         "http://127.0.0.1:5173/success" ||
-        "https://eazy-ecommerce-dawitlior.vercel.app/success",
+        "https://eazy-buy-now.netlify.app/success",
       cancel_url:
         "http://127.0.0.1:5173/cancel" ||
-        "https://eazy-ecommerce-dawitlior.vercel.app/cancel",
+        "https://eazy-buy-now.netlify.app/cancel",
     });
 
     return response.status(200).json({ redirectUrl: session.url });
