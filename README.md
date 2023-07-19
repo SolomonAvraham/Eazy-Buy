@@ -1,17 +1,23 @@
 
 <div align="center">
+<a  href="https://eazy-buy-now.netlify.app"><img width=100   src="https://i.ibb.co/xhwmxsb/share.png" alt="share" border="0"></a>
+<p>LINK</p>
+</div>
+<div align="center">
 <h1>Eazy-Buy - Electric Ecommerce Website</h1>
 <img src="https://eazy-buy-now.netlify.app/icons/icon.png" />
 <h3>Eazy-Buy is a collaborative project developed by a team using MERN stack with TypeScript and React Query. It offers a seamless shopping experience for electric products.</h3>
 </div>
 
+<div align="center" size="55px">
+  <img width=350 src="https://i.ibb.co/SdD49d1/Screenshot-2023-07-19-at-23-01-11.png" alt="Screenshot-2023-07-19-at-23-01-11" border="0"> 
+<img width=350 src="https://i.ibb.co/x5V1Z3g/Screenshot-2023-07-19-at-23-01-55.png" alt="Screenshot-2023-07-19-at-23-01-55" border="0"> 
+</div>
 
 
 ## Features
 
 - **Product Catalog**: Browse and explore a wide range of electric products.
-
-- **Product Search**: Quickly find specific products.
 
 - **Product Details**: View detailed information and customer reviews.
 
@@ -22,8 +28,6 @@
 - **Order Management**: Conveniently track and manage orders.
 
 - **Payment Integration**: Safe and secure payment processing.
-
-- **User Reviews**: Read and submit product reviews.
 
 - **Responsive Design**: Enjoy a seamless shopping experience on any device.
 
