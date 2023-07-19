@@ -13,7 +13,7 @@ type UserSignUp = {
 
 export const userLogin = async (data: UserLogin) => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/client/login`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/client/login`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -37,7 +37,7 @@ export const userLogin = async (data: UserLogin) => {
 
 export const userSignUp = async (data: UserSignUp) => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/client/register`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/client/register`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -61,7 +61,7 @@ export const userSignUp = async (data: UserSignUp) => {
 
 export const getUserById = async (id: string) => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/client/user/${id}`);
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/client/user/${id}`);
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -78,7 +78,7 @@ export const getUserById = async (id: string) => {
 
 export const addToCart = async (productId: string, id: string) => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/update`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/update`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export const addToCart = async (productId: string, id: string) => {
 export const removeAndAdd = async (id: string) => {
   try {
     const response = await fetch(
-      `${import.meta.env.BASE_URL}/client/removeCart/${id}`
+      `${import.meta.env.VITE_BASE_URL}/client/removeCart/${id}`
     );
     if (response.ok) {
       const responseData = await response.json();
