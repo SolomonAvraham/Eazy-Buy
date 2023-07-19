@@ -1,7 +1,7 @@
 
 export const getProducts = async () => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/products`);
+    const response = await fetch(`${import.meta.env.local.BASE_URL}/api/stripe/products`);
     if (response.ok) {
       const responseData = await response.json();
 
@@ -20,7 +20,7 @@ export const getProducts = async () => {
 export const getProductById = async (id: string) => {
   try {
     const response = await fetch(
-      `${import.meta.env.BASE_URL}/api/stripe/productById/${id}`
+      `${import.meta.env.local.BASE_URL}/api/stripe/productById/${id}`
     );
     if (response.ok) {
       const responseData = await response.json();
@@ -44,13 +44,16 @@ type AddToCart = {
 
 export const addProductToCart = async (user: AddToCart) => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/update`, {
-      method: "POST",
-      body: JSON.stringify({ user }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.local.BASE_URL}/api/stripe/update`,
+      {
+        method: "POST",
+        body: JSON.stringify({ user }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -72,13 +75,16 @@ type DeleteProps = {
 
 export const deleteProductFromCart = async (data: DeleteProps) => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/delete`, {
-      method: "DELETE",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.local.BASE_URL}/api/stripe/delete`,
+      {
+        method: "DELETE",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -95,13 +101,16 @@ export const deleteProductFromCart = async (data: DeleteProps) => {
 
 export const purchaseProducts = async (product: string[]) => {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/checkout`, {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.local.BASE_URL}/api/stripe/checkout`,
+      {
+        method: "POST",
+        body: JSON.stringify(product),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
