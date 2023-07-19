@@ -9,7 +9,7 @@ const Contact: React.FC = () => {
   };
 
   const handleSubmit = (values: any, { resetForm }: any) => {
-    // Handle form submission logic here
+ 
     console.log(values);
     resetForm();
   };

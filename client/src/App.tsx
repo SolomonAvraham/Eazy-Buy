@@ -13,9 +13,8 @@ import Contact from "./components/pages/contact/Contact";
 import CartComponent from "./components/pages/cart/Cart"
 import ShowProduct from "./components/pages/showProuduct/ShowProduct";
 import NotFound from "./components/features/notFound";
-import About from "./components/pages/about/About.tsx";
-
-
+import About from "./components/pages/about/About";
+ 
 
 function App() {
   return (
