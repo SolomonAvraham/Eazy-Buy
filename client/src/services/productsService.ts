@@ -2,14 +2,11 @@ const getEnvironment = () => {
   const isCloudDeployment = window.location.href.includes(
     "https://eazy-buy-now.netlify.app/"
   );
-  console.log(isCloudDeployment);
 
-  return !isCloudDeployment
+  return isCloudDeployment
     ? import.meta.env.VITE_BASE_URL
     : import.meta.env.VITE_LOCAL_URL;
 };
-
-console.log(getEnvironment());
 
 export const getProducts = async () => {
   try {
