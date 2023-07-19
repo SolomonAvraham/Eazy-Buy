@@ -1,8 +1,7 @@
-const server = process.env.BASE_URL
 
 export const getProducts = async () => {
   try {
-    const response = await fetch(`${server}/api/stripe/products`);
+    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/products`);
     if (response.ok) {
       const responseData = await response.json();
 
@@ -21,7 +20,7 @@ export const getProducts = async () => {
 export const getProductById = async (id: string) => {
   try {
     const response = await fetch(
-      `${server}/api/stripe/productById/${id}`
+      `${import.meta.env.BASE_URL}/api/stripe/productById/${id}`
     );
     if (response.ok) {
       const responseData = await response.json();
@@ -45,7 +44,7 @@ type AddToCart = {
 
 export const addProductToCart = async (user: AddToCart) => {
   try {
-    const response = await fetch(`${server}/api/stripe/update`, {
+    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/update`, {
       method: "POST",
       body: JSON.stringify({ user }),
       headers: {
@@ -73,7 +72,7 @@ type DeleteProps = {
 
 export const deleteProductFromCart = async (data: DeleteProps) => {
   try {
-    const response = await fetch(`${server}/api/stripe/delete`, {
+    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/delete`, {
       method: "DELETE",
       body: JSON.stringify(data),
       headers: {
@@ -96,7 +95,7 @@ export const deleteProductFromCart = async (data: DeleteProps) => {
 
 export const purchaseProducts = async (product: string[]) => {
   try {
-    const response = await fetch(`${server}/api/stripe/checkout`, {
+    const response = await fetch(`${import.meta.env.BASE_URL}/api/stripe/checkout`, {
       method: "POST",
       body: JSON.stringify(product),
       headers: {
