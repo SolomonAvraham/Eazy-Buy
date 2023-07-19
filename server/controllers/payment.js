@@ -35,11 +35,11 @@ export const putStripePurchase = async (request, response) => {
       currency: "ILS",
       mode: "payment",
       success_url:
-        "http://127.0.0.1:5173/success" ||
-        "https://eazy-buy-now.netlify.app/success",
+        "https://eazy-buy-now.netlify.app/success" ||
+        "http://127.0.0.1:5173/success",
       cancel_url:
-        "http://127.0.0.1:5173/cancel" ||
-        "https://eazy-buy-now.netlify.app/cancel",
+        "https://eazy-buy-now.netlify.app/cancel" ||
+        "http://127.0.0.1:5173/cancel",
     });
 
     return response.status(200).json({ redirectUrl: session.url });
