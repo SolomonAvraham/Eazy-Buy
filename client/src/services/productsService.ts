@@ -1,14 +1,14 @@
 const getEnvironment = () => {
-  // Check if the URL contains a specific keyword indicating it's a cloud deployment
   const isCloudDeployment = window.location.href.includes(
     "https://eazy-server.onrender.com"
   );
 
-  // Return the appropriate environment file based on the URL
   return isCloudDeployment
     ? import.meta.env.VITE_BASE_URL
     : import.meta.env.VITE_LOCAL_URL;
 };
+
+console.log(getEnvironment());
 
 export const getProducts = async () => {
   try {
