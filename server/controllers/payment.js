@@ -39,7 +39,7 @@ export const putStripePurchase = async (request, response) => {
         "https://eazy-ecommerce-dawitlior.vercel.app/success",
       cancel_url:
         "http://127.0.0.1:5173/cancel" ||
-        "https://eazy-ecommerce-dawitlior.vercel.app/",
+        "https://eazy-ecommerce-dawitlior.vercel.app/cancel",
     });
 
     return response.status(200).json({ redirectUrl: session.url });

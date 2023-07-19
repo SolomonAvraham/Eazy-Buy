@@ -12,10 +12,10 @@ import Success from "./components/features/success/success";
 import Contact from "./components/pages/contact/Contact";
 import CartComponent from "./components/pages/cart/Cart"
 import ShowProduct from "./components/pages/showProuduct/ShowProduct";
+// import About from "./components/pages/about/About";
 import NotFound from "./components/features/notFound";
-import About from "./components/pages/about/About.tsx";
 
-
+ 
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
       <Header />
       <Routes>
         <Route element={<NotFound />} path="*" />
-        <Route element={<About />} path="/about" />
+        {/* <Route element={<About />} path="/about" /> */}
         <Route element={<Contact />} path="/contact" />
         <Route element={<Cancel />} path="/cancel" />
         <Route element={<Success />} path="/success" />
