@@ -1,7 +1,12 @@
-
 export const getProducts = async () => {
   try {
+<<<<<<< HEAD
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/products`);
+=======
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/stripe/products`
+    );
+>>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
 
@@ -44,6 +49,7 @@ type AddToCart = {
 
 export const addProductToCart = async (user: AddToCart) => {
   try {
+<<<<<<< HEAD
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/update`, {
       method: "POST",
       body: JSON.stringify({ user }),
@@ -51,6 +57,18 @@ export const addProductToCart = async (user: AddToCart) => {
         "Content-Type": "application/json",
       },
     });
+=======
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/stripe/update`,
+      {
+        method: "POST",
+        body: JSON.stringify({ user }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+>>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -72,6 +90,7 @@ type DeleteProps = {
 
 export const deleteProductFromCart = async (data: DeleteProps) => {
   try {
+<<<<<<< HEAD
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/delete`, {
       method: "DELETE",
       body: JSON.stringify(data),
@@ -79,6 +98,18 @@ export const deleteProductFromCart = async (data: DeleteProps) => {
         "Content-Type": "application/json",
       },
     });
+=======
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/stripe/delete`,
+      {
+        method: "DELETE",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+>>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -95,6 +126,7 @@ export const deleteProductFromCart = async (data: DeleteProps) => {
 
 export const purchaseProducts = async (product: string[]) => {
   try {
+<<<<<<< HEAD
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/checkout`, {
       method: "POST",
       body: JSON.stringify(product),
@@ -102,6 +134,18 @@ export const purchaseProducts = async (product: string[]) => {
         "Content-Type": "application/json",
       },
     });
+=======
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/stripe/checkout`,
+      {
+        method: "POST",
+        body: JSON.stringify(product),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+>>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
