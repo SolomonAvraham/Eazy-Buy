@@ -2,6 +2,7 @@ const getEnvironment = () => {
   const isCloudDeployment = window.location.href.includes(
     "https://eazy-server.onrender.com"
   );
+  console.log(isCloudDeployment);
 
   return isCloudDeployment
     ? import.meta.env.VITE_BASE_URL
