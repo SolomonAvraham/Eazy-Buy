@@ -10,9 +10,11 @@ type UserSignUp = {
   address: string;
 };
 
+const server = process.env.BASE_URL
+
 export const userLogin = async (data: UserLogin) => {
   try {
-    const response = await fetch("http://localhost:5001/client/login", {
+    const response = await fetch(`${server}/client/login`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -36,7 +38,7 @@ export const userLogin = async (data: UserLogin) => {
 
 export const userSignUp = async (data: UserSignUp) => {
   try {
-    const response = await fetch("http://localhost:5001/client/register", {
+    const response = await fetch(`${server}/client/register`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -60,7 +62,7 @@ export const userSignUp = async (data: UserSignUp) => {
 
 export const getUserById = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:5001/client/user/${id}`);
+    const response = await fetch(`${server}/client/user/${id}`);
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -77,7 +79,7 @@ export const getUserById = async (id: string) => {
 
 export const addToCart = async (productId: string, id: string) => {
   try {
-    const response = await fetch('http://localhost:5001/api/stripe/update', {
+    const response = await fetch(`${server}/api/stripe/update`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,7 +108,7 @@ export const addToCart = async (productId: string, id: string) => {
 export const removeAndAdd = async (id: string) => {
   try {
     const response = await fetch(
-      `http://localhost:5001/client/removeCart/${id}`
+      `${server}/client/removeCart/${id}`
     );
     if (response.ok) {
       const responseData = await response.json();
