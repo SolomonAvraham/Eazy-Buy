@@ -1,7 +1,8 @@
 const getEnvironment = () => {
   const isCloudDeployment = window.location.href.includes(
-    "https://eazy-buy-now.netlify.app/"
+    "https://eazy-buy-now.netlify.app"
   );
+console.log("11",isCloudDeployment);
 
   return isCloudDeployment
     ? import.meta.env.VITE_BASE_URL

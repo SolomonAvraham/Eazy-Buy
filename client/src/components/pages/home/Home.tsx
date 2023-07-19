@@ -71,7 +71,6 @@ export default function Home() {
     const cart = user.data?.user.cart[0] ? user.data?.user.cart : null; //Property 'user' does not exist on type '{}'.ts(2339)
 
     const productExist = cart?.find((prod: any) => prod.id === product.id);
-    console.log(productExist);
 
     if (!productExist) return true;
     return false;
