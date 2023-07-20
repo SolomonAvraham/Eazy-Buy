@@ -51,7 +51,6 @@
 
 5. Start the development server: `npm start`.
 
-6. Access the application at `http://localhost:3000`.
 
 ## Usage
 
