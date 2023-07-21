@@ -12,7 +12,7 @@ import Success from "./components/features/success/success";
 import Contact from "./components/pages/contact/Contact";
 import CartComponent from "./components/pages/cart/Cart"
 import ShowProduct from "./components/pages/showProuduct/ShowProduct";
-import About from "./components/pages/about/About";
+import About from "./components/pages/About/About";
 import NotFound from "./components/features/notFound";
 
  
