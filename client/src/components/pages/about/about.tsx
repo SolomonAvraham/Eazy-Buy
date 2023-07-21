@@ -1,9 +1,12 @@
+
+
+
 export default function About(): JSX.Element {
   return (
     <>
       <div className="    min-h-screen  bg-slate-200 p-10 ">
         <div className="  mb-24 mt-24 flex flex-col items-center justify-center rounded-2xl bg-slate-200 shadow-2xl">
-          <h1 className=" mt-5 text-6xl">Eazy-Buy</h1>
+          <h1 className=" text-3xl md:text-6xl mt-5">Eazy-Buy</h1>
           <hr className="mt-3 h-1 w-1/3 bg-gray-500 bg-opacity-10" />
           <h3 className=" mt-3 text-xl font-bold ">קצת עלינו</h3>
           <hr className="h-1 w-1/6 bg-gray-500 bg-opacity-10" />

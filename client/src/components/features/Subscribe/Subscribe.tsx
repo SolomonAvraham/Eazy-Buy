@@ -1,18 +1,38 @@
+import { useState } from "react";
+
 const Subscribe = () => {
+  const [inputValue, setInputValue] = useState<string>("");
+
   return (
-    <div className=" mx-auto mb-5 mt-5 hidden w-1/2 rounded-2xl  bg-wh-10 p-10 text-center shadow-2xl md:block">
-      <h4 className="text-base font-semibold">הירשמו למועדון שלנו</h4>
-      <p className="mx-auto my-3 w-5/6 text-wh-500">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (!inputValue) {
+          return alert("אנא הזין את כתובת המייל שלך");
+        }
+        setInputValue("");
+        return alert("הצטרפת למועדון Eazy-Buy !");
+      }}
+      className=" flex flex-col items-center justify-center bg-gray-200 px-10 py-10  text-center tracking-wide"
+    >
+      <h4 className=" text-xl ">הירשמו למועדון שלנו!</h4>
+      <hr className=" w-1/2 bg-black bg-opacity-80" />
+      <p className=" mt-2 font-semibold">
         הזינו כתובת דוא"ל כדי לקבל חדשות מובילות ודילים מעולים!!
       </p>
       <input
-        className="w-5/6 min-w-[100px] border-2 px-5 py-2 text-center"
+        onChange={(e) => setInputValue(e.target.value)}
+        value={inputValue}
+        className=" mt-5 rounded-lg placeholder:text-center"
         placeholder='הזינו כתובת דוא"ל'
       />
-      <button className="   mt-3 w-5/6 min-w-[100px] px-5 py-2 font-semibold text-wh-10">
+      <button
+        type="submit"
+        className="  mt-3 rounded-lg  bg-black px-5  py-2 font-semibold text-white hover:bg-blue-900"
+      >
         הירשם
       </button>
-    </div>
+    </form>
   );
 };
 

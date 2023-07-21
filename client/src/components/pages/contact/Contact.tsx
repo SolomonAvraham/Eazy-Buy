@@ -63,9 +63,9 @@ const Contact: React.FC = () => {
   ];
   return (
     <>
-      <div className="  min-h-screen bg-slate-200 p-10  ">
+      <div className="   min-h-screen bg-slate-200 p-10  ">
         <div className="  mb-24 mt-24 flex flex-col items-center justify-center rounded-2xl bg-slate-200 shadow-2xl">
-          <h1 className=" mt-5 text-6xl">Eazy-Buy</h1>
+          <h1 className=" mt-5 text-3xl md:text-6xl">Eazy-Buy</h1>
           <hr className="mt-3 h-1 w-1/3 bg-gray-500 bg-opacity-10" />
           <h2 className=" mt-3 text-xl font-bold ">צור קשר</h2>
           <hr className="h-1 w-1/6 bg-gray-500 bg-opacity-10" />
@@ -99,6 +99,7 @@ const Contact: React.FC = () => {
                     className="error-message text-red-600"
                   />
                   <Field
+                    
                     key={elements.name}
                     type={elements.type}
                     id={elements.type}

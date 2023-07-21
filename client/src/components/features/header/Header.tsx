@@ -212,7 +212,7 @@ const Header = () => {
           )}
         </div>
       )}
-      <div className="absolute left-16 right-16 top-16 -z-10 flex justify-center md:left-28 md:right-28 md:gap-1">
+      <div className="absolute left-16 right-16 top-16 -z-10 flex gap-1 justify-center md:left-28 md:right-28 md:gap-1">
         {[
           { route: "products", name: "מוצרים" },
           { route: "about", name: "קצת עלינו" },
@@ -223,7 +223,7 @@ const Header = () => {
             onClick={() => navigateToTopPage(`/${element.route}`)}
             className={`${
               lastPath === element.route && "bg-slate-400 hover:text-slate-900"
-            } cursor-pointer rounded-b-3xl border-b-2 border-black bg-black px-3 py-3 text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
+            } px-2 h-16 w-1/2 md:w-fit flex items-center justify-center  text-center  cursor-pointer rounded-b-3xl border-b-2 border-black bg-black   md:text-lg font-semibold text-white hover:text-slate-400 md:px-5 md:py-2`}
           >
             {element.name}
           </div>

@@ -1,12 +1,16 @@
+const getEnvironment = () => {
+  const isCloudDeployment = window.location.href.includes(
+    "https://eazy-buy-now.netlify.app/"
+  );
+
+  return isCloudDeployment
+    ? import.meta.env.VITE_BASE_URL
+    : import.meta.env.VITE_LOCAL_URL;
+};
+
 export const getProducts = async () => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/products`);
-=======
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/api/stripe/products`
-    );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
+    const response = await fetch(`${getEnvironment()}/api/stripe/products`);
     if (response.ok) {
       const responseData = await response.json();
 
@@ -17,6 +21,7 @@ export const getProducts = async () => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -25,7 +30,7 @@ export const getProducts = async () => {
 export const getProductById = async (id: string) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/api/stripe/productById/${id}`
+      `${getEnvironment()}/api/stripe/productById/${id}`
     );
     if (response.ok) {
       const responseData = await response.json();
@@ -36,6 +41,8 @@ export const getProductById = async (id: string) => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -49,15 +56,6 @@ type AddToCart = {
 
 export const addProductToCart = async (user: AddToCart) => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/update`, {
-      method: "POST",
-      body: JSON.stringify({ user }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-=======
     const response = await fetch(
       `${import.meta.env.VITE_BASE_URL}/api/stripe/update`,
       {
@@ -68,7 +66,6 @@ export const addProductToCart = async (user: AddToCart) => {
         },
       }
     );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -78,6 +75,7 @@ export const addProductToCart = async (user: AddToCart) => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -90,15 +88,6 @@ type DeleteProps = {
 
 export const deleteProductFromCart = async (data: DeleteProps) => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/delete`, {
-      method: "DELETE",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-=======
     const response = await fetch(
       `${import.meta.env.VITE_BASE_URL}/api/stripe/delete`,
       {
@@ -109,7 +98,6 @@ export const deleteProductFromCart = async (data: DeleteProps) => {
         },
       }
     );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -119,6 +107,7 @@ export const deleteProductFromCart = async (data: DeleteProps) => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -126,15 +115,6 @@ export const deleteProductFromCart = async (data: DeleteProps) => {
 
 export const purchaseProducts = async (product: string[]) => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/checkout`, {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-=======
     const response = await fetch(
       `${import.meta.env.VITE_BASE_URL}/api/stripe/checkout`,
       {
@@ -145,7 +125,6 @@ export const purchaseProducts = async (product: string[]) => {
         },
       }
     );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -155,6 +134,7 @@ export const purchaseProducts = async (product: string[]) => {
         errorResponseData.message || "Failed to login. Please try again."
       );
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message);
   }

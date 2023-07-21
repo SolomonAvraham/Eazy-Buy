@@ -10,29 +10,26 @@ type UserSignUp = {
   address: string;
 };
 
+const getEnvironment = () => {
+  const isCloudDeployment = window.location.href.includes(
+    "https://eazy-buy-now.netlify.app/"
+  );
+
+  return isCloudDeployment
+    ? import.meta.env.VITE_BASE_URL
+    : import.meta.env.VITE_LOCAL_URL;
+};
+
 export const userLogin = async (data: UserLogin) => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/client/login`, {
+
+    const response = await fetch(`${getEnvironment()}/client/login`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
-=======
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/client/login`,
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
-
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -49,27 +46,13 @@ export const userLogin = async (data: UserLogin) => {
 
 export const userSignUp = async (data: UserSignUp) => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/client/register`, {
+    const response = await fetch(`${getEnvironment()}/client/register`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
-=======
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/client/register`,
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
-
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -86,13 +69,7 @@ export const userSignUp = async (data: UserSignUp) => {
 
 export const getUserById = async (id: string) => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/client/user/${id}`);
-=======
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/client/user/${id}`
-    );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
+    const response = await fetch(`${getEnvironment()}/client/user/${id}`);
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
@@ -109,32 +86,17 @@ export const getUserById = async (id: string) => {
 
 export const addToCart = async (productId: string, id: string) => {
   try {
-<<<<<<< HEAD
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/stripe/update`, {
-      method: 'POST',
+
+    const response = await fetch(`${getEnvironment()}/api/stripe/update`, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         userId: id,
         product: productId,
       }),
     });
-=======
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/api/stripe/update`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: id,
-          product: productId,
-        }),
-      }
-    );
->>>>>>> e9e02a9ecad1dc85b5a296c8ff0241c46b831b43
     if (response.ok) {
       const responseData = await response.json();
       return responseData.json();
@@ -149,9 +111,7 @@ export const addToCart = async (productId: string, id: string) => {
 
 export const removeAndAdd = async (id: string) => {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/client/removeCart/${id}`
-    );
+    const response = await fetch(`${getEnvironment()}/client/removeCart/${id}`);
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
