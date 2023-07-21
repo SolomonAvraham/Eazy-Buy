@@ -32,10 +32,10 @@ const TableRow: React.FC<TableRowProps> = ({
       <td className=" w-1/2  p-1 text-center">{product.description}</td>
 
       <td> ₪ {price.toLocaleString()}</td>
-      <td>
+      <td className=" sm:p-2">
         <button
           onClick={() => onRemove(product.id)}
-          className=" rounded-2xl bg-[#E30000] px-5 py-2 text-lg font-bold text-white hover:bg-[#eeeeee] hover:text-black hover:shadow-2xl "
+          className=" rounded-2xl bg-[#E30000] px-5 py-2 md:text-lg font-bold text-white hover:bg-[#eeeeee] hover:text-black hover:shadow-2xl "
         >
           הסר
         </button>
@@ -50,8 +50,8 @@ const Table: React.FC<{
   onRemove: (id: string) => void;
 }> = ({ data, onRemove }) => {
   return (
-    <table className="   table-auto rounded-xl   border border-gray-100 bg-slate-200  shadow-2xl">
-      <thead className="h-14    bg-slate-400 md:text-xl ">
+    <table className="    table-auto  rounded-3xl border   border-gray-100 bg-slate-200  shadow-2xl">
+      <thead className="h-14 text-center bg-slate-400 md:text-xl  ">
         <tr>
           <th>מס׳</th>
           <th>תמונה</th>
@@ -61,7 +61,7 @@ const Table: React.FC<{
           <th>הסר</th>
         </tr>
       </thead>
-      <tbody className=" md:p-10 [&>*:nth-child(even)]:bg-slate-300 ">
+      <tbody className=" w-3 md:p-10  [&>*:nth-child(even)]:bg-slate-300">
         {data?.map((item, index) => (
           <TableRow
             key={index}

@@ -167,9 +167,11 @@ export default function Home() {
             })}
         </div>
       </section>
-      <div className=" mt-10 h-5 bg-gray-400 bg-opacity-5  shadow-sm "></div>
-      <Subscribe />
-      <div className=" mb-10 h-5 bg-gray-400 bg-opacity-5 shadow-sm "></div>
+      <div className="flex-flex-col ">
+        <div className=" mt-10 h-5 bg-gray-400 bg-opacity-5  shadow-sm "></div>
+        <Subscribe />
+        <div className=" mb-10 h-5 bg-gray-400 bg-opacity-5 shadow-sm "></div>
+      </div>
     </div>
   );
 }

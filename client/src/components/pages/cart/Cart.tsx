@@ -93,7 +93,7 @@ const CartComponent = () => {
   );
 
   return (
-    <div className="flex  min-h-screen    flex-col items-center justify-center bg-gray-200 py-10 ">
+    <div className="flex   min-h-screen    flex-col items-center justify-center bg-gray-200 py-10">
       {isError && (
         <div className=" flex h-screen items-center justify-center">
           <h1 className=" text-5xl">תקלה, אנא נסה שוב או מאוחר יותר...</h1>
@@ -104,7 +104,7 @@ const CartComponent = () => {
           <ScaleLoader color="#657c78" height={30} width={30} />
         </div>
       ) : (
-        <div className="  p-5   ">
+        <div className=" text-xs p-2">
           {cart ? (
             <div className=" flex flex-col items-center">
               <div className="py-20 text-5xl">
