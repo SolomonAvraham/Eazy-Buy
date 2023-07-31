@@ -55,6 +55,7 @@ export const getStripeProductById = async (request, response) => {
       apiVersion: "2020-08-27",
     });
     const product = await stripe.products.retrieve(productId);
+ 
     return response.json(product);
   } catch (error) {
     response.status(400).json({ message: error.message });

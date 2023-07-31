@@ -1,7 +1,7 @@
 interface CardProps {
   image: string;
   title: string;
-  price: number;
+  price?: number;
   info: string;
   onClick?: () => void;
   cart?: () => void;
@@ -47,7 +47,7 @@ const Card: React.FC<CardProps> = ({
           </p>
           <p className="mb-2 text-center font-bold text-gray-900 ">
             {" "}
-            ₪ {price.toLocaleString()}
+            ₪ {price?.toLocaleString()}
           </p>
         </div>
 

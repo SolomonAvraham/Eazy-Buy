@@ -32,6 +32,7 @@ export default function ShowProduct( ) {
     queryClient.refetchQueries(["user"]);
     return;
   };
+ 
 
   return (
     <>
@@ -51,7 +52,7 @@ export default function ShowProduct( ) {
             <Card
               title={product?.name}
               image={product?.images[0]}
-              price={111}
+              // price={111}
               info={product?.description}
               cart={() => cart(product.product)}
               removeBtn={true}
