@@ -104,7 +104,7 @@ export default function Home() {
     <div className="flex  flex-col   bg-gray-200 ">
       <section className="   relative -z-0 mt-16 flex h-screen flex-col items-center justify-center px-4 py-8 text-center">
         <h2 className=" text-2xl font-medium text-slate-900 drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.9)]  md:w-fit md:text-6xl">
-          ברוכים הבאים ל - Eazy Buy! שדכשגדכש'גכר שקכ שדג
+          ברוכים הבאים ל - Eazy Buy! 
         </h2>{" "}
         <p className="font-medium text-slate-900 drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.9)]  md:text-4xl ">
           גלו עולם של מוצרים חשמליים בקרבתכם.

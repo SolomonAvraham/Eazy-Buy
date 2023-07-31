@@ -43,13 +43,13 @@
 
 1. Clone this repository: `git clone https://github.com/your_username/eazy-buy.git`.
 
-2. Navigate to the project directory: `cd eazy-buy`.
+2. Navigate to the project directory: `cd Eazy-buy`.
 
 3. Install dependencies: `npm install`.
 
 4. Set up environment variables for database connection, payment gateway integration, and sensitive information using a `.env` file.
 
-5. Start the development server: `npm start`.
+5. Start the development server: `npm run dev`.
 
 
 ## Usage
