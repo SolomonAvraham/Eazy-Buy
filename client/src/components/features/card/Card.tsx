@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <div className="  rounded-2xl bg-white shadow-xl ">
       <div className="flex flex-col items-center justify-center  px-5 py-6">
-        <div className="ff">
+        <div className=" ">
           <img
             onClick={onClick}
             src={image}

@@ -35,7 +35,7 @@ export default function ShowProduct( ) {
 
   return (
     <>
-      <div className="flex  h-screen flex-col items-center justify-center bg-gray-200 py-10 ">
+      <div className="flex  h-screen flex-col items-center justify-center bg-gray-200 md:py-10 ">
         {isLoading && (
           <div className=" flex h-screen items-center justify-center">
             <ScaleLoader color="#657c78" height={30} width={30} />
@@ -46,7 +46,7 @@ export default function ShowProduct( ) {
             <h1 className=" text-5xl">תקלה, אנא נסה שוב או מאוחר יותר...</h1>
           </div>
         )}
-        <div className="flex  w-1/3 items-center justify-center">
+        <div className="flex  p-2 md:w-1/3 items-center justify-center">
           {product && (
             <Card
               title={product?.name}

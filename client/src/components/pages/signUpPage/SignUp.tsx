@@ -95,9 +95,9 @@ export default function SignUp(): JSX.Element {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className=" min-h-screen p-10 md:p-0  md:py-16 "
+      className=" min-h-screen p-1 md:p-0 py-52  md:py-16 "
     >
-      <div className=" mx-auto flex h-screen flex-col items-center justify-center gap-5 rounded-xl border-2 border-black   border-opacity-10 bg-gray-100 shadow-xl md:h-fit md:w-1/2 md:p-5">
+      <div className=" md:mt-10 mx-auto flex h-fit flex-col items-center justify-center gap-5 rounded-xl border-2 border-black   border-opacity-10 bg-gray-100 shadow-xl md:h-fit md:w-1/2 md:p-5 py-5 md:py-40  ">
         <h1 className=" pt-4 text-6xl">הירשמות</h1>{" "}
         <hr className=" h-1 w-1/2 rounded-2xl bg-black bg-opacity-5" />
         <img
@@ -138,7 +138,7 @@ export default function SignUp(): JSX.Element {
               value={formik.values[formField.name]}
               placeholder={formField.label}
               required
-              className="  focus:shadow-outline w-80 rounded-lg border-2   border-sky-200 text-lg placeholder:text-center placeholder:text-gray-200 focus:outline-sky-600"
+              className="  focus:shadow-outline md:w-80 rounded-lg border-2   border-sky-200 text-lg placeholder:text-center placeholder:text-gray-200 focus:outline-sky-600"
             />
           </div>
         ))}

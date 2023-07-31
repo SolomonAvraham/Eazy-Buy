@@ -92,8 +92,11 @@ export default function Login() {
   }
  
   return (
-    <form onSubmit={formik.handleSubmit} className="   md:py-16  ">
-      <div className="  mx-auto flex h-screen flex-col items-center justify-center gap-5 rounded-xl border-2 border-black   border-opacity-10 bg-gray-100 shadow-xl md:h-fit md:w-1/2 md:p-5">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="    min-h-screen p-1 py-52 md:p-0  md:py-16 "
+    >
+      <div className=" mx-auto flex h-fit flex-col items-center justify-center gap-5 rounded-xl border-2 border-black border-opacity-10   bg-gray-100 py-5 shadow-xl md:mt-10 md:h-fit md:w-1/2 md:p-5 md:py-40 ">
         <h1 className=" pt-4 text-6xl">התחברות</h1>{" "}
         <hr className=" h-1 w-1/2 rounded-2xl bg-black bg-opacity-5" />
         <img
@@ -128,7 +131,7 @@ export default function Login() {
               onChange={formik.handleChange}
               value={formik.values[formField.name]}
               required
-              className="focus:shadow-outline w-80 rounded-lg border-2 border-sky-200 p-1 text-lg placeholder:text-center placeholder:text-gray-200 focus:outline-sky-600"
+              className="focus:shadow-outline md:w-80 rounded-lg border-2 border-sky-200 p-1 text-lg placeholder:text-center placeholder:text-gray-200 focus:outline-sky-600"
             />
           </div>
         ))}
